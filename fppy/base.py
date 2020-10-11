@@ -1,6 +1,13 @@
 from functools import reduce
 
 def compose(*args):
+    """数学中的compose
+
+    >>> from fppy.base import compose
+    >>> compose(lambda x: x+1, lambda x: x**2)(1)
+    >>> 4
+
+    """
     return reduce(lambda f, g: lambda x: g(f(x)), args)
 
 def and_then(*args):
@@ -18,14 +25,19 @@ class Function:
             *args,
             **kargs
         ):
+        """执行函数
+        """
         return self.f(*args, **kargs)
     
     @staticmethod
     def F_(f):
+        """函数盒子/修饰器
+        """
         return Function(f)
 
-    
     def and_then(self, g):
+        """先执行本身，再执行g
+        """
         temp_g = g.f if isinstance(g, Function) else g
         def helper(*args, **kargs):
             return temp_g(self.f(*args, **kargs))
