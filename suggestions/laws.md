@@ -1,3 +1,16 @@
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config(
+    {
+      tex2jax: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']]
+        },
+      messageStyle: "none" 
+    }
+  );
+</script>
+
 # 一些常用规则
 
 ## 数学法则
