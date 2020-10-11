@@ -3,6 +3,20 @@ from abc import ABC, abstractmethod
 from functools import reduce
 from itertools import takewhile
 
+
+class LList:
+    def __init__(
+        self,
+        x: Iterable,):
+        self.iter_ = [i for i in x]
+
+    def map(self, f):
+        return LList(f(i) for i in self.iter_)
+    
+    def collect(self):
+        return self.iter_
+
+
 class Stream:
     def __init__(
         self,
@@ -55,6 +69,9 @@ class Stream:
     
     def takewhile(self, f):
         return stream(takewhile(f, self.iter_))
+
+    def take(self, n):
+        return stream(enumerate(self.iter_)).takewhile(lambda x: x[0] < n).map(lambda x: x[1])
         
 def stream(x: Iterable):
     return Stream(x)

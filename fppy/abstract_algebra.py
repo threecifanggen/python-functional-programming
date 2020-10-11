@@ -39,3 +39,14 @@ def process_reduce(m: Monoid, n: int=4):
             l_split = split_list(l, n)
             return f(p.imap(f, l_split))
     return helper
+
+class Functor(ABC):
+    @staticmethod
+    @abstractmethod
+    def map(self, f):
+        pass
+
+
+class Monad(Monoid, Functor):
+    pass
+
