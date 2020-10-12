@@ -32,14 +32,6 @@ def test_thread_reduce_sum(SM):
     
 @pytest.mark.skip(reason="cannot pickle abc")
 def test_process_reduce_sum(SM):
-    class SumMonoid(Monoid):
-        @staticmethod
-        def join(x, y):
-            return x + y
-
-        @staticmethod
-        def unit():
-            return 0
     m_sum = process_reduce(SM)
     assert m_sum([1, 2, 3]) == 6
     assert m_sum([]) == 0
