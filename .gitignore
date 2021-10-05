@@ -136,3 +136,9 @@ dmypy.json
 
 .pytest_cache
 .pytest_cache/*
+
+cov_html
+cov.xml
+cov_annotate
+
+.metals

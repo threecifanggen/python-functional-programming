@@ -26,6 +26,8 @@ def test_partial_function_apply():
 
 @pytest.mark.PartialFunction
 def test_partial_function_or_else():
+    """测试偏函数的or_else功能
+    """
     f = (
         PartialFunction
         .case(lambda x: x > 1)
@@ -43,6 +45,8 @@ def test_partial_function_or_else():
 
 @pytest.mark.PartialFunction
 def test_partial_function_is_defined_at():
+    """测试偏函数的is_defined_at功能
+    """
     f = (
         PartialFunction
         .case(lambda x: x > 1)
