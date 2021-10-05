@@ -19,8 +19,8 @@ def and_then(*args):
 class _Function:
     """加强版函数
     
-    ## 使用方法
-    
+    Example:
+
     """
     
     def __init__(
