@@ -1,0 +1,2 @@
+class NoOtherCaseError(Exception):
+    pass

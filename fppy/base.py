@@ -1,5 +1,6 @@
 from functools import reduce
 
+
 def compose(*args):
     """数学中的compose
 
@@ -15,7 +16,13 @@ def and_then(*args):
     """
     return reduce(lambda f, g: lambda x: f(g(x)), args)
 
-class Function:
+class _Function:
+    """加强版函数
+    
+    ## 使用方法
+    
+    """
+    
     def __init__(
             self,
             f,
@@ -49,21 +56,21 @@ class Function:
     def F_(f):
         """函数盒子/修饰器
         """
-        return Function(f, f.__name__)
+        return _Function(f, f.__name__)
 
     def and_then(self, g):
         """先执行本身，再执行g
         """
-        temp_g = g.f if isinstance(g, Function) else g
+        temp_g = g.f if isinstance(g, _Function) else g
         def helper(*args, **kargs):
             return temp_g(self.f(*args, **kargs))
-        return Function(helper)
+        return _Function(helper)
 
     def compose(self, g):
-        temp_g = g.f if isinstance(g, Function) else g
+        temp_g = g.f if isinstance(g, _Function) else g
         def helper(*args, **kargs):
             return self.f(temp_g(*args, **kargs))
-        return Function(helper)
+        return _Function(helper)
 
     def map(self, l, to_lazy = False):
         if to_lazy:
@@ -71,4 +78,4 @@ class Function:
         else:
             return list(map(self.f, l))
 
-F_ = Function.F_
+F_ = _Function.F_
