@@ -1,4 +1,8 @@
-from fppy.base import F_, compose, and_then
+from fppy.base import (
+    F_,
+    compose,
+    and_then
+)
 import pytest
 
 @pytest.mark.Function
@@ -49,6 +53,7 @@ def test_function_map():
     assert f.map([1, 2, 3], True) != [2, 3, 4]
     assert list(f.map([1, 2, 3], True)) == [2, 3, 4]
 
+@pytest.mark.base
 def test_compose_and_then():
     f = lambda x: x + 1
     g = lambda x: x * 2
@@ -56,3 +61,4 @@ def test_compose_and_then():
     
     assert compose(f, g, h)(1) == 3
     assert and_then(f, g, h)(1) == 64
+

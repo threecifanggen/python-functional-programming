@@ -22,4 +22,6 @@ build-backend = "poetry.core.masonry.api"
 [tool.pytest.ini_options]
 markers = [
     "Function: 测试一个更强大的函数对象",
+    "PartialFunction: 测试偏函数",
+    "base: 基本函数"
 ]
