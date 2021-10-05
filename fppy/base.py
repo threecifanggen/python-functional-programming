@@ -11,14 +11,21 @@ def compose(*args):
     return reduce(lambda f, g: lambda x: g(f(x)), args)
 
 def and_then(*args):
+    """和compose采用不同的fold方向的函数
+    """
     return reduce(lambda f, g: lambda x: f(g(x)), args)
 
 class Function:
     def __init__(
             self,
-            f
+            f,
+            name=None
         ):
         self.f = f
+        if name is None:
+            self.name = f.__name__
+        else:
+            self.name = name
 
     def __call__(
             self,
@@ -28,12 +35,21 @@ class Function:
         """执行函数
         """
         return self.f(*args, **kargs)
+
+    def apply(
+            self,
+            *args,
+            **kargs
+        ):
+        """应用函数 = 执行函数
+        """
+        return self.f(*args, **kargs)
     
     @staticmethod
     def F_(f):
         """函数盒子/修饰器
         """
-        return Function(f)
+        return Function(f, f.__name__)
 
     def and_then(self, g):
         """先执行本身，再执行g

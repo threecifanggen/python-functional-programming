@@ -1,7 +1,7 @@
 from typing import Iterable
 from abc import ABC, abstractmethod
 from functools import reduce
-from itertools import takewhile
+from itertools import takewhile, accumulate, repeat
 
 
 class LList:
@@ -17,11 +17,20 @@ class LList:
         return self.iter_
 
 
-class Stream:
+class LazyList:
     def __init__(
         self,
         x: Iterable):
         self.iter_ = (i for i in x)
+
+    def split_head(
+        self
+        ):
+        try:
+            x = next(self.iter_)
+        except:
+            x = None
+        return (x, self)
     
     def map(self, f):
         return stream(map(f, self.iter_))
@@ -38,6 +47,12 @@ class Stream:
         except:
             x = None
         return x
+
+    @abstractmethod
+    def from_iter(start):
+        def helper(f):
+            return Stream(accumulate(repeat(start), lambda a, _: f(a)))
+        return helper
     
     def tail(self):
         try:
@@ -57,7 +72,6 @@ class Stream:
             else:
                 return self.find(f)
         except:
-            raise
             print(x)
             return None
             
@@ -65,7 +79,7 @@ class Stream:
         return stream(filter(f, self.iter_))
 
     def len(self):
-        return self.foldleft(lambda x, y: x + 1, 0) 
+        return self.foldleft(lambda x, _: x + 1, 0) 
     
     def takewhile(self, f):
         return stream(takewhile(f, self.iter_))
