@@ -8,7 +8,6 @@ authors = ["huangbaochen <huangbaochenwo@live.com>"]
 python = "^3.8"
 pathos = "^0.2.6"
 drill = "^1.2.0"
-Sphinx = "^4.2.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.1"
