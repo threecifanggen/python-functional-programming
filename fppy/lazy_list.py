@@ -2,7 +2,12 @@ from typing import Iterable
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from functools import reduce
-from itertools import takewhile, accumulate, repeat
+from itertools import (
+    takewhile,
+    accumulate,
+    repeat,
+    chain
+)
 
 
 @dataclass
@@ -41,6 +46,9 @@ class LazyList:
             
     def collect(self):
         return list(self.iter_)
+    
+    def scan_left(self, f, init):
+        return LazyList(accumulate(chain([init], self.iter_), f))
         
     def find(self, f):
         try:

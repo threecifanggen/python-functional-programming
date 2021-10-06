@@ -58,6 +58,19 @@ def test_lazy_list_len():
     ) == 4
 
 @pytest.mark.LazyList
+def test_lazy_list_scan_left():
+    assert (
+        LazyList([1, 2, 3, 4])
+        .scan_left(lambda x, y: x + str(y), "0")
+        .collect()
+    ) == ["0", "01", "012", "0123", "01234"]
+    assert (
+        LazyList([1, 2, 3, 4])
+        .scan_left(lambda x, y: x + y, 0)
+        .collect()
+    ) == [0, 1, 3, 6, 10]
+
+@pytest.mark.LazyList
 def test_lazy_list_filter():
     assert (
         LazyList([1, 2, 3, 4])
