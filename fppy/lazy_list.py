@@ -48,9 +48,17 @@ class LazyList:
         return list(self.iter_)
     
     def scan_left(self, f, init):
+        """类似reduce，但将每个结果输出
+
+        Attribute:
+            f[Callable]: reduce函数
+            init: 设定初始值
+        """
         return LazyList(accumulate(chain([init], self.iter_), f))
         
     def find(self, f):
+        """找到第一个符合f的元素
+        """
         try:
             x = next(self.iter_)
             if f(x):
