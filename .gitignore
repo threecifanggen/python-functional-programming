@@ -144,3 +144,5 @@ cov_annotate
 .metals
 
 fppy.egg-info
+
+.empty
