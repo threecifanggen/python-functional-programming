@@ -114,8 +114,8 @@ power = Z(lambda f: lambda x, n: 1 if (n == 0) else x * f(x, n - 1))
 
 定义一个如下函数：
 
-- 如果x > 0；则计算1 / x
-- 如果x < 0；则计算log(-x)
+- 如果`x > 0`，则计算`1 / x`
+- 如果`x < 0`，则计算`log(-x)`
 
 ```python
 from math import log
