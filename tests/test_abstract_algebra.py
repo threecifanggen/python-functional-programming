@@ -1,8 +1,5 @@
 from fppy.abstract_algebra import (
-    Monoid,
-    mreduce,
-    thread_reduce,
-    process_reduce,
+    Monoid
 )
 import pytest
 
@@ -19,19 +16,19 @@ def SM():
     return SumMonoid
 
 def test_sum(SM):
-    m_sum = mreduce(SM)
+    m_sum = SM.mreduce(SM)
     assert m_sum([1, 2, 3]) == 6
     assert m_sum([]) == 0
     assert SM.join(1, 2) == 3
     assert SM.unit() == 0
     
 def test_thread_reduce_sum(SM):
-    m_sum = thread_reduce(SM)
+    m_sum = SM.thread_reduce(SM)
     assert m_sum([1, 2, 3]) == 6
     assert m_sum([]) == 0
     
 @pytest.mark.skip(reason="cannot pickle abc")
 def test_process_reduce_sum(SM):
-    m_sum = process_reduce(SM)
+    m_sum = SM.process_reduce(SM)
     assert m_sum([1, 2, 3]) == 6
     assert m_sum([]) == 0
