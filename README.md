@@ -114,8 +114,8 @@ power = Z(lambda f: lambda x, n: 1 if (n == 0) else x * f(x, n - 1))
 
 定义一个如下函数：
 
-- 如果x > 0；则计算1 / x
-- 如果x < 0；则计算log(-x)
+- 如果`x > 0`，则计算`1 / x`
+- 如果`x < 0`，则计算`log(-x)`
 
 ```python
 from math import log
@@ -150,3 +150,52 @@ pf_less_then_0 = PartialFunction\
 
 pf = pf_greater_then_0.or_else(pf_less_then_0)
 ```
+
+### 惰性求值
+
+#### 1. 惰性属性
+
+```python
+from fppy.lazy_evaluate import lazy_property
+
+@dataclass
+class Circle:
+    x: float
+    y: float
+    r: float
+
+    @lazy_property
+    def area(self):
+        print("area compute")
+        return self.r ** 2 * 3.14
+```
+
+以上定义了一个圆的类，具体获取`area`时，仅第一次会计算（通过打印`"area compute"`显示）。
+
+#### 2. 惰性值
+
+`Python`没有代码块的概念，所以必须把惰性求值过程包在一个函数内，以下是调用方法：
+
+```python
+from fppy.lazy_evaluate import lazy_val
+
+def f():
+    print("f compute")
+    return 12
+
+lazy_val.a = f
+```
+
+调用结果下：
+
+```python
+>>> lazy_val.a
+f compute
+12
+>>> lazy_val.a
+12
+```
+
+这就表示仅第一次调用时发生了计算。
+
+
