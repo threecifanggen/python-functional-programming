@@ -35,3 +35,7 @@ def test_with_badge():
     if os.path.isfile('badge/cov-badge.svg'):
         os.remove('badge/cov-badge.svg')
     os.system('coverage-badge -o badge/cov-badge.svg')
+
+if __name__ == "__main__":
+    docs()
+    test_with_badge()
