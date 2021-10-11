@@ -39,7 +39,8 @@ markers = [
     "state: state方法",
     "lens: 光学元件",
     "property: property-based testing",
-    "const: 常量"
+    "const: 常量",
+    "lazy: 惰性值"
 ]
 addopts = [
     "--cov-config=.coveragerc"
