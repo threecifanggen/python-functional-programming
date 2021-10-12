@@ -1,9 +1,15 @@
 from fppy.base import (
     F_,
     compose,
-    and_then
+    and_then,
+    I
 )
 import pytest
+
+@pytest.mark.base
+def test_identity():
+    assert I(1) == 1
+    assert I(lambda x: x + 1)(1) == (lambda x: x + 1)(1)
 
 @pytest.mark.Function
 def test_function_attribute():
@@ -61,4 +67,7 @@ def test_compose_and_then():
     
     assert compose(f, g, h)(1) == 64
     assert and_then(f, g, h)(1) == 3
+    assert compose(f, I)(1) == f(1)
+    assert compose(I, f, g)(1) == compose(f, g)(1)
+    assert and_then(f, g, I, h)(1) == and_then(f, g, h)(1) == and_then(I, f, g, h)(1)
 

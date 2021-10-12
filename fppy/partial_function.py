@@ -63,7 +63,14 @@ class _PartialFunction:
         return _PartialFunction(
             self.case_list + other.case_list
         )
+    
+    def lift(self, value):
+        from .option import Just, Nothing
 
+        if self.is_defined_at(value):
+            return Just(self.__call__(value))
+        else:
+            return Nothing
 
 class PartialFunction:
     @staticmethod

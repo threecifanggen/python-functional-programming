@@ -90,3 +90,12 @@ def test_lazy_list_split_head():
 @pytest.mark.LazyList
 def test_lazy_list_from():
     assert LazyList.from_iter(1)(lambda x: x + 1).take(4).collect() == [1, 2, 3, 4]
+
+
+@pytest.mark.LazyList
+def test_lazy_list_zip():
+    assert LazyList([1, 2, 3]).zip_with([2, 3, 4]).collect() == [
+        (1, 2),
+        (2, 3),
+        (3, 4)
+    ]

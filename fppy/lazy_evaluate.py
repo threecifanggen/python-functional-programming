@@ -29,7 +29,8 @@ class _LazyValue:
                 return res
         except:
             raise AttributeError(
-                "type object 'Lazy' has no attribute '{}'".format(name)
+                "type object 'Lazy' has no attribute '{}'"
+                .format(name)
             )
 
 lazy_val = _LazyValue()

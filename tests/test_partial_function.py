@@ -56,4 +56,17 @@ def test_partial_function_is_defined_at():
     )
     assert f.is_defined_at(1) == True
     assert f.is_defined_at(-1) == False
-    
+
+
+@pytest.mark.PartialFunction
+def test_partial_function_lift():
+    from fppy.option import Nothing, Just
+    f = (
+        PartialFunction
+        .case(lambda x: x > 1)
+        .then(lambda x: x + 1)
+        .case(lambda x: x > 0)
+        .then(lambda x: x * 2)
+    )
+    assert f.lift(1) == Just(2)
+    assert f.lift(0) == Nothing
