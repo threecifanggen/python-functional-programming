@@ -1,5 +1,9 @@
 from functools import reduce
 
+def I(x):
+    """identity函数
+    """
+    return x
 
 def compose(*args):
     """数学中的compose

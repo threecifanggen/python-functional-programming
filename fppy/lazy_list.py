@@ -1,5 +1,4 @@
-from typing import Iterable
-from abc import ABC, abstractmethod
+from collections.abc import Iterable
 from dataclasses import dataclass
 from functools import reduce
 from itertools import (
@@ -38,7 +37,7 @@ class LazyList:
     def foldleft(self, f, init):
         return reduce(f, self.iter_, init)
 
-    @abstractmethod
+    @staticmethod
     def from_iter(start):
         def helper(f):
             return LazyList(accumulate(repeat(start), lambda a, _: f(a)))
@@ -80,5 +79,15 @@ class LazyList:
     def take(self, n):
         return lazy_list(enumerate(self.iter_)).takewhile(lambda x: x[0] < n).map(lambda x: x[1])
         
+    def zip_with(self, other):
+        if isinstance(other, LazyList):
+            return LazyList(zip(self.iter_, other.iter_))
+        elif isinstance(other, Iterable):
+            return LazyList(zip(self.iter_, other))
+        else:
+            raise TypeError(
+                "other is not a Iterable object "
+                "or LazyList")
+
 def lazy_list(x: Iterable):
     return LazyList(x)
