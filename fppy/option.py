@@ -2,6 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from abc import abstractmethod
 from typing import Callable, TypeVar
+from fppy.errors import NothingHasNoSuchMethod
 
 T = TypeVar('T')
 S = TypeVar('S')
@@ -23,7 +24,7 @@ class Option:
         pass
 
     @abstractmethod
-    def getOrElse(self, v):
+    def get_or_else(self, v):
         pass
 
     @abstractmethod
@@ -38,13 +39,17 @@ class Option:
 class Nothing(Option):
     
     def collect(self, pf):
-        return Nothing
+        return Nothing()
 
-    def getOrElse(self, v):
+    def get_or_else(self, v):
         return v
 
     def filter(self, f: Callable[[S], Option[T]]) -> Option[T]:
-        return Nothing
+        return Nothing()
+
+    @property
+    def get(self):
+        raise NothingHasNoSuchMethod("Nothin has no get method")
 
 @dataclass
 class Just(Option):
@@ -54,7 +59,11 @@ class Just(Option):
         return Just(f(self.value))
 
     def flat_map(self, f: Callable[[S], Option[T]]) -> Option[T]:
-        return f(self.value)
+        res = f(self.value)
+        if isinstance(res, Option):
+            return res
+        else:
+            raise TypeError("result is not an Option object")
 
     @property
     def get(self):
@@ -63,11 +72,11 @@ class Just(Option):
     def collect(self, pf):
         return pf.lift(self.value)
 
-    def getOrElse(self, v):
+    def get_or_else(self, v):
         return self.value
 
     def filter(self, f: Callable[[S], Option[T]]) -> Option[T]:
         if f(self.value):
             return self
         else:
-            return Nothing
+            return Nothing()
