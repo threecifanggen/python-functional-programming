@@ -18,6 +18,9 @@
 - [ ] 偏函数
 - [ ] 基于性质测试(Property-based Testing)
 - [x] 更多功能的函数装饰器
+- [x] Option类
+- [ ] State类
+- [ ] Either类
 
 ## 快速功能预览
 
@@ -198,5 +201,67 @@ f compute
 ```
 
 这就表示仅第一次调用时发生了计算。
+
+### 错误处理
+
+### 1. Option
+
+```python
+from fppy.option import Just, Nothing
+
+>>> Just(1).map(lambda x: x + 1)
+Just(2)
+>>> Just(1).flat_map(lambda x: Just(x * 3))
+Just(3)
+>>> Just(1).get
+1
+>>> Just(1).get_or_else(2)
+1
+>>> Just(1).filter(lambda x: x < 0)
+Nothing()
+>>> Just(1).filter(lambda x: x > 0)
+Just(1)
+```
+
+与偏函数合用会有很多妙处：
+
+```python
+from math import log
+from fppy.partail_function import PartialFunction
+
+pf = PartialFunction\
+    .case(lambda x: x > 0)\
+    .then(lambda x: 1 / x)\
+    .case(lambda x: x < 0)\
+    .then(lambda x: log(-x))
+
+
+>>> pf.lift(1)
+Just(1)
+>>> pf.lift(0)
+Nothing()
+>>> Just(1).collect(pf)
+Just(1)
+>>> Just(0).collect(pf)
+Nothing
+
+>>> Just(1).collect(pf)
+Just(1.)
+>>> Just(1).collect(pf).map(lambda x: int(x) - 1)
+Just(-1)
+>>> Just(1).collect(pf).map(lambda x: int(x) - 1).collect(pf)
+Just(0)
+>>> Just(1).collect(pf).map(lambda x: int(x) - 1).collect(pf).collect(pf)
+Nothing()
+>>> Just(1).collect(pf).map(lambda x: int(x) - 1).collect(pf).collect(pf).collect(pf)
+Nothing()
+>>>Just(1).collect(pf).map(lambda x: int(x) - 1).collect(pf).collect(pf).collect(pf).get_or_else(2)
+2
+
+```
+
+### 2. Either
+
+(待完善)
 
 
