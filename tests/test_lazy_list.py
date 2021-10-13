@@ -99,3 +99,16 @@ def test_lazy_list_zip():
         (2, 3),
         (3, 4)
     ]
+    
+@pytest.mark.LazyList
+def test_lazy_list_for_all():
+    assert LazyList([1, 2, 3]).for_all(lambda x: x > 0) == True
+    assert LazyList([1, 2, 3]).for_all(lambda x: x == 2) == False
+
+@pytest.mark.LazyList
+def test_lazy_list_drop():
+    assert LazyList([1, 2, 3]).drop(2).collect() == [3]
+
+@pytest.mark.LazyList
+def test_lazy_list_last():
+    assert LazyList([1, 2, 3]).last == 3
