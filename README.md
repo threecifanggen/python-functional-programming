@@ -243,7 +243,7 @@ Nothing()
 >>> Just(1).collect(pf)
 Just(1)
 >>> Just(0).collect(pf)
-Nothing
+Nothing()
 
 >>> Just(1).collect(pf)
 Just(1.)
@@ -255,7 +255,7 @@ Just(0)
 Nothing()
 >>> Just(1).collect(pf).map(lambda x: int(x) - 1).collect(pf).collect(pf).collect(pf)
 Nothing()
->>>Just(1).collect(pf).map(lambda x: int(x) - 1).collect(pf).collect(pf).collect(pf).get_or_else(2)
+>>> Just(1).collect(pf).map(lambda x: int(x) - 1).collect(pf).collect(pf).collect(pf).get_or_else(2)
 2
 
 ```

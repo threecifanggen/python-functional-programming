@@ -2,6 +2,7 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 from functools import reduce
 from itertools import (
+    islice,
     takewhile,
     accumulate,
     repeat,
@@ -88,6 +89,27 @@ class LazyList:
             raise TypeError(
                 "other is not a Iterable object "
                 "or LazyList")
+    
+    def for_all(self, func):
+        return self.map(func).reduce(lambda x, y: x and y)
+    
+    def concat(self, other):
+        if isinstance(other, LazyList):
+            return LazyList(chain(self.iter_, other.iter_))
+        elif isinstance(other, Iterable):
+            return LazyList(chain(self.iter_, other))
+        else:
+            raise TypeError(
+                "other is not a Iterable object "
+                "or LazyList")
+
+    def drop(self, n):
+        return LazyList(islice(self.iter_, n, None))
+
+    @property
+    def last(self):
+        return self.reduce(lambda _, y: y)
+
 
 def lazy_list(x: Iterable):
     return LazyList(x)
