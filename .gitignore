@@ -146,3 +146,5 @@ cov_annotate
 fppy.egg-info
 
 .empty
+
+requirements.txt

@@ -2,7 +2,6 @@ from __future__ import annotations
 from abc import ABCMeta, abstractmethod, ABC
 from functools import reduce
 from typing import Iterable
-from _pytest.python_api import raises
 from pathos.multiprocessing import ProcessPool
 from pathos.abstract_launcher import AbstractWorkerPool
 from pathos.threading import ThreadPool

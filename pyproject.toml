@@ -5,7 +5,7 @@ description = "A implements of Functional Programming in Python."
 authors = ["huangbaochen <huangbaochenwo@live.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.10"
 pathos = "^0.2.8"
 drill = "^1.2.0"
 
