@@ -14,7 +14,11 @@
 - [x] 惰性求值/惰性属性
 - [ ] 抽象代数
 - [x] 常用组合子
-- [x] 惰性列表
+- [ ] 列表类
+  - [x] 基于`Iterator`的惰性列表
+  - [x] 基于元组定义的列表
+  - [ ] 基于类定义的列表
+  - [ ] 基于类从头定义的惰性列表 
 - [ ] 偏函数
 - [ ] 基于性质测试(Property-based Testing)
 - [x] 更多功能的函数装饰器
@@ -57,11 +61,13 @@ from fppy import const
 # Error
 ```
 
-### 惰性列表
+### 列表类
 
 一个可以实现`map`、`reduce`等操作的惰性列表
 
-#### 1. 从头定义
+#### 惰性列表
+
+##### 1. 新建
 
 ```python
 from fppy.lazy_list import LazyList
@@ -77,7 +83,7 @@ x = (i for i in range(100))
 ll = LazyList(x)
 ```
 
-#### 2. map、filter、collect
+##### 2. map、filter、collect
 
 ```python
 LazyList([1, 2, 3])\
@@ -86,7 +92,7 @@ LazyList([1, 2, 3])\
     .collect() # 返回[2, 4]
 ```
 
-#### 3. 其他
+##### 3. 其他
 
 其他方法参考文档。
 

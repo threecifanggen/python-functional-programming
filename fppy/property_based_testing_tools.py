@@ -1,4 +1,4 @@
-from itertools import chain, repeat
+from itertools import chain
 from random import randint, choices
 from string import ascii_letters, digits, punctuation, whitespace
 

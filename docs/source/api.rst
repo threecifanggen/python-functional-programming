@@ -40,3 +40,26 @@ API Reference
 
 .. autofunction:: fppy.combinator.Y
 .. autofunction:: fppy.combinator.Z
+
+
+列表类
+===========================
+
+
+通过元组的实现
+------------------------
+
+.. autofunction:: fppy.cons_list_base.cons
+.. autofunction:: fppy.cons_list_base.head
+.. autofunction:: fppy.cons_list_base.tail
+
+
+常用函数
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: fppy.cons_list_base.map_cons
+.. autofunction:: fppy.cons_list_base.map_cons_curry
+.. autofunction:: fppy.cons_list_base.filter_cons
+.. autofunction:: fppy.cons_list_base.filter_cons_curry
+.. autofunction:: fppy.cons_list_base.fold_left_cons
+.. autofunction:: fppy.cons_list_base.fold_left_cons_curry

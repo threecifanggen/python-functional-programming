@@ -1,6 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from abc import abstractmethod, ABC
+from abc import abstractmethod
+from collections import ABC
 from typing import Callable, Tuple, TypeVar
 from .lazy_list import LazyList
 

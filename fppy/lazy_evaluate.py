@@ -1,4 +1,4 @@
-from typing import Callable, TypeVar
+from typing import Callable
 from .errors import NotVoidFunctionError
 from .gt import S
 

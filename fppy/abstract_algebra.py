@@ -1,5 +1,5 @@
 from __future__ import annotations
-from abc import ABCMeta, abstractmethod, ABC
+from abc import abstractmethod, ABC
 from functools import reduce
 from typing import Iterable
 from pathos.multiprocessing import ProcessPool

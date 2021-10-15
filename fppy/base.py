@@ -1,6 +1,5 @@
 from __future__ import annotations
 from functools import reduce
-from types import FunctionType
 from typing import Any, Callable, Generic, Iterable, List
 from .gt import S0, S, T, T1
 
@@ -23,12 +22,12 @@ def compose(*args: Callable) -> Callable:
     >>> 4
 
     """
-    return reduce(lambda f, g: lambda x: g(f(x)), args)
+    return reduce(lambda f, g: lambda x: f(g(x)), args)
 
 def and_then(*args: Callable[[Any], Any]) -> Callable[[Any], Any]:
     """和compose采用不同的fold方向的函数
     """
-    return reduce(lambda f, g: lambda x: f(g(x)), args)
+    return reduce(lambda f, g: lambda x: g(f(x)), args)
 
 class _Function(Generic[S, T]):
     """加强版函数
