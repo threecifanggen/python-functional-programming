@@ -10,6 +10,9 @@
    :maxdepth: 2
    :caption: Contents:
 
+   api
+   development_manual
+
 
 
 Indices and tables

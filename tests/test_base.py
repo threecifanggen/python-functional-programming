@@ -65,8 +65,8 @@ def test_compose_and_then():
     g = lambda x: x * 2
     h = lambda x: x ** 3
     
-    assert compose(f, g, h)(1) == 64
-    assert and_then(f, g, h)(1) == 3
+    assert compose(f, g, h)(1) == 3
+    assert and_then(f, g, h)(1) == 64
     assert compose(f, I)(1) == f(1)
     assert compose(I, f, g)(1) == compose(f, g)(1)
     assert and_then(f, g, I, h)(1) == and_then(f, g, h)(1) == and_then(I, f, g, h)(1)

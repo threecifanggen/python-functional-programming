@@ -1,4 +1,4 @@
-from collections.abc import Iterable
+from typing import Iterable
 from dataclasses import dataclass
 from functools import reduce
 from itertools import (
