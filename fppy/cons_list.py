@@ -1,9 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from typing import Callable, TypeVar, Generic
-
-S = TypeVar("S")
-T = TypeVar("T")
+from .gt import S, T
 
 @dataclass
 class LazyVal(Generic[S]):
@@ -51,7 +49,6 @@ class LazyStop(LazyConsList, Generic[S]):
     def filter(self, f):
         return self
 
-
 @dataclass
 class LazyCons(LazyConsList, Generic[S]):
     head: Callable[[], S]
@@ -92,8 +89,7 @@ class LazyCons(LazyConsList, Generic[S]):
             return self.tail.take(n)
         else:
             return LazyCons(LazyVal(self.head), self.tail.take(n - 1))
-        
-    
+
 
 def map_cons_list(f: Callable[[S], T], cons_list: ConsList[S]) -> ConsList[T]:
     if cons_list == Empty():
@@ -118,7 +114,7 @@ def fold_left_cons_list(f: Callable[[S, T], S], cons_list: ConsList[T], init: S)
     else:
         return fold_left_cons_list(f, cons_list.tail, f(init, cons_list.head))
 
-def cons_list_maker(*args) -> Cons[S]:
+def cons_list_maker(*args: S) -> Cons[S]:
     if len(args) == 0:
         return Empty()
     else:

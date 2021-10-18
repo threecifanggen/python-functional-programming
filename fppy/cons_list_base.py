@@ -1,10 +1,14 @@
-from types import new_class
-from typing import Callable, Generic
-from .gt import S, T
+from typing import Callable, Tuple
+from .gt import S, T, GenericTypeVar
 
-ListBase = new_class("ListBase", (Generic[T], ), dict())
 
-def cons(head: S, tail: S) -> ListBase[S]:
+ListBase = GenericTypeVar[S]
+EmptyListBase = Tuple[()]
+ConsListBase = Callable[[], Tuple[S, ListBase[S]]]
+
+empty_list_base = ()
+
+def cons(head: S, tail: ListBase[S]) -> ConsListBase[S]:
     """基于二元元组实现的List
 
     Args:
@@ -14,9 +18,41 @@ def cons(head: S, tail: S) -> ListBase[S]:
     def helper():
         return (head, tail)
     return helper
-    
-head: Callable[[ListBase[S]], S] = lambda cons_list: cons_list()[0]
-tail: Callable[[ListBase[S]], S] = lambda cons_list: cons_list()[1]
+
+def cons_apply(*args: S) -> ConsListBase[S]:
+    """一个方便的定义方式
+
+    Returns:
+        ConsListBase[S]: 返回结果
+    """
+    if len(args) == 0:
+        return empty_list_base
+    else:
+        return cons(args[0], cons_apply(*args[1:]))
+
+
+head: Callable[[ConsListBase[S]], S] = lambda cons_list: cons_list()[0]
+tail: Callable[[ConsListBase[S]], S] = lambda cons_list: cons_list()[1]
+
+
+def equal_cons(this: ListBase[S], that: ListBase[S]) -> bool:
+    """判断两个list是否相等
+
+    Args:
+        this (ListBase[S]): 第一个list
+        that (ListBase[S]): 第二个list
+
+    Returns:
+        bool: 返回第二个相等
+    """
+    if this == empty_list_base and that != empty_list_base:
+        return False
+    elif this != empty_list_base and that == empty_list_base:
+        return False
+    elif this == empty_list_base and that == empty_list_base:
+        return True
+    else:
+        return head(this) == head(that) and equal_cons(tail(this), tail(that))
 
 def print_cons_with_brackets(cons_list: ListBase[S]) -> str:
     """打印ListBase的括号风格结果
@@ -57,7 +93,7 @@ def map_cons(f: Callable[[S], T], cons_list: ListBase[S]) -> ListBase[T]:
         ListBase[T]: 结果
     """
     if cons_list == ():
-        return ()
+        return empty_list_base
     else:
         return cons(f(head(cons_list)), map_cons(f, tail(cons_list)))
 
@@ -72,7 +108,7 @@ def filter_cons(f: Callable[[S], bool], cons_list: ListBase[S]) -> ListBase[S]:
         ListBase[S]: 结果
     """
     if cons_list == ():
-        return ()
+        return empty_list_base
     else:
         hd, tl = head(cons_list), tail(cons_list)
         if f(hd):

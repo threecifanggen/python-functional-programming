@@ -7,7 +7,14 @@ from fppy.base import (
 import pytest
 
 @pytest.mark.base
-def test_identity():
+@pytest.mark.parametrize(
+    "args, expected",
+    [
+        (1, 1),
+        ("a", "a")
+    ])
+def test_identity(args, expected):
+    assert I(args) == expected
     assert I(1) == 1
     assert I(lambda x: x + 1)(1) == (lambda x: x + 1)(1)
 

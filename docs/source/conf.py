@@ -1,11 +1,3 @@
-'''
-@Author: huangbaochen aka 3Gee <huangbaochenwo@live.come>
-@Date: 2020-06-22 15:24:17
-@LastEditTime: 2020-07-01 16:58:41
-@LastEditors: huangbaochen aka 3Gee <huangbaochenwo@live.come>
-@Description: 文档输出
-@如有问题，请联系维护人
-'''
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
