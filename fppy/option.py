@@ -9,31 +9,7 @@ S = TypeVar('S')
 
 @dataclass
 class Option:
-    
-    @abstractmethod
-    def map(self, f: Callable[[S], T]) -> Option[T]:
-        pass
-
-    @abstractmethod
-    def flat_map(self, f: Callable[[S], Option[T]]) -> Option[T]:
-        pass
-    
-    @property
-    @abstractmethod
-    def get(self):
-        pass
-
-    @abstractmethod
-    def get_or_else(self, v):
-        pass
-
-    @abstractmethod
-    def collect(self, pf):
-        pass
-
-    @abstractmethod
-    def filter(self, f: Callable[[S], Option[T]]) -> Option[T]:
-        pass
+    pass
 
 @dataclass
 class Nothing(Option):

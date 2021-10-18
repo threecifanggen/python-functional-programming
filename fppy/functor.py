@@ -11,7 +11,7 @@ class BoxValue(Generic[S]):
     value: S
 
     def map(self, f: Callable[[S], T]) -> BoxValue[T]:
-        return Box(f(self.value))
+        return BoxValue(f(self.value))
 
     @staticmethod
     def of(value: S) -> BoxValue[S]:

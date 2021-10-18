@@ -34,9 +34,9 @@ def cons_apply(*args: S) -> ConsListBase[S]:
 
 
 head: Callable[[ConsListBase[S]], S] = lambda cons_list: cons_list()[0]
-head.__name__ == """获取List第一个元素"""
+head.__doc__ == """获取List第一个元素"""
 tail: Callable[[ConsListBase[S]], S] = lambda cons_list: cons_list()[1]
-tail.__name__ == """截取第一个元素后的List"""
+tail.__doc__ == """截取第一个元素后的List"""
 
 def equal_cons(this: ListBase[S], that: ListBase[S]) -> bool:
     """判断两个list是否相等

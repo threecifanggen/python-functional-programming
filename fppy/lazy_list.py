@@ -92,6 +92,9 @@ class LazyList:
     
     def for_all(self, func):
         return self.map(func).reduce(lambda x, y: x and y)
+
+    def __add__(self, other):
+        return self.concat(other)
     
     def concat(self, other):
         if isinstance(other, LazyList):

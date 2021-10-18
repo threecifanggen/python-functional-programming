@@ -45,3 +45,4 @@ def test_option_collect():
 def test_option_filter():
     assert Just(1).filter(lambda x: x > 0) == Just(1)
     assert Just(1).filter(lambda x: x < -1) == Nothing()
+    assert Just(1).filter(lambda x: x < 0).filter(lambda x: x > 0) == Nothing()
