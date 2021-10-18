@@ -63,3 +63,4 @@ API Reference
 .. autofunction:: fppy.cons_list_base.filter_cons_curry
 .. autofunction:: fppy.cons_list_base.fold_left_cons
 .. autofunction:: fppy.cons_list_base.fold_left_cons_curry
+.. autofunction:: fppy.cons_list_base.equal_cons

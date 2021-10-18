@@ -1,3 +1,5 @@
+"""用二元元组实现的列表
+"""
 from typing import Callable, Tuple
 from .gt import S, T, GenericTypeVar
 
@@ -12,8 +14,8 @@ def cons(head: S, tail: ListBase[S]) -> ConsListBase[S]:
     """基于二元元组实现的List
 
     Args:
-        head ([type]): [description]
-        tail ([type]): [description]
+        head (S): 头部元素
+        tail (ListBase[S]): 尾部元素
     """
     def helper():
         return (head, tail)
@@ -32,8 +34,9 @@ def cons_apply(*args: S) -> ConsListBase[S]:
 
 
 head: Callable[[ConsListBase[S]], S] = lambda cons_list: cons_list()[0]
+head.__name__ == """获取List第一个元素"""
 tail: Callable[[ConsListBase[S]], S] = lambda cons_list: cons_list()[1]
-
+tail.__name__ == """截取第一个元素后的List"""
 
 def equal_cons(this: ListBase[S], that: ListBase[S]) -> bool:
     """判断两个list是否相等
