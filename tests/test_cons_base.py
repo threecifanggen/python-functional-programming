@@ -1,6 +1,8 @@
+from hypothesis.core import example
 from fppy.cons_list_base import *
 from fppy.base import and_then
 import pytest
+from hypothesis import strategies as st, given
 
 @pytest.fixture(scope="session")
 def ls1():
@@ -88,3 +90,15 @@ def test_collection_cons_base(ls1):
         filter_cons_curry(lambda x: x % 2 == 0),
         fold_left_cons_curry(lambda x, y: x + y)(0)
         )(ls1) == 6
+
+@pytest.mark.cons_base
+@given(
+    xs1 = st.lists(st.integers()),
+    xs2 = st.lists(st.text()),
+)
+def test_cons_print(xs1, xs2):
+    assert print_cons(cons_apply(*xs1)) == ', '.join(str(i) for i in xs1) + ', nil' if xs1 != [] else "nil"
+    assert print_cons(cons_apply(*xs2)) == ', '.join(str(i) for i in xs2) + ', nil' if xs2 != [] else "nil"
+    assert print_cons(cons_apply(*[])) == 'nil'
+    assert print_cons_with_brackets(cons_apply(*[])) == "()"
+    assert print_cons_with_brackets(cons_apply(1, 2, 3)) == "(1, (2, (3, ())))"
