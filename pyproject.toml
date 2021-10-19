@@ -43,6 +43,7 @@ markers = [
     "const: 常量",
     "lazy: 惰性值",
     "cons_base: 用二元元组定义的list",
+    "cons_list: 用类实现的list",
     "functor: 函子"
 ]
 addopts = [

@@ -65,6 +65,45 @@ from fppy import const
 
 一个可以实现`map`、`reduce`等操作的惰性列表
 
+#### 元组实现的列表
+
+##### 1. 新建
+
+```python
+from fppy.cons_list_base import *
+
+a = cons_apply(1, 2, 3)
+head(a) # 1
+tail(a) # cons(2, cons(3, ()))
+```
+
+##### 2. 打印
+
+```python
+>>> print_cons(cons_apply(1, 2, 3))
+1, 2, 3, nil
+```
+
+##### 3. 列表操作
+
+```python
+a = cons_apply(1, 2, 3)
+map_cons_curry(lambda x: x + 1)(a) # cons_apply(2, 3, 4)
+filter_cons_curry(lambda x: x % 2 == 0)(a) # cons_apply(2)
+fold_left_cons_curry(lambda x, y: x + y)(0)(a) # 6
+```
+
+#### 类实现的列表
+
+```python
+from fppy.cons_list import Cons
+
+Cons.maker(1, 2, 3)\
+    .map(lambda x: x + 1)
+    .filter(lambda x: x % 2 == 0)
+    .fold_left(lambda x, y: x + y, 0)
+```
+
 #### 惰性列表
 
 ##### 1. 新建
