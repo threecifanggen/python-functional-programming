@@ -24,7 +24,7 @@ def test_with_badge():
         ```
     """
     os.system((
-        'pytest '
+        'pytest -v '
         '--html=dist/report.html '
         '--cov-report html:cov_html '
         '--cov-report xml:cov.xml '

@@ -1,6 +1,8 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import Callable, TypeVar, Generic
+from typing import Callable, Generic
+
+from _pytest.mark.structures import EMPTY_PARAMETERSET_OPTION
 from .gt import S, T
 
 @dataclass
@@ -15,13 +17,39 @@ class ConsList(Generic[S]):
     pass
 
 @dataclass
-class Empty(ConsList):
-    pass
+class Empty(ConsList, Generic[S]):
+    def map(self, _: Callable[[S], T]) -> Empty:
+        return Empty()
+
+    def filter(self, _: Callable[[S], T]) -> Empty:
+        return Empty()
+    
+    def fold_left(self, _: Callable[[S], T], init: S) -> Empty:
+        return init
 
 @dataclass
 class Cons(ConsList, Generic[S]):
     head: S
     tail: S
+
+    @classmethod
+    def maker(cls, *args: S) -> ConsList[S]:
+        if len(args) == 0:
+            return Empty()
+        else:
+            return Cons(args[0], cls.maker(*args[1:]))
+
+    def map(self, f: Callable[[S], T]) -> ConsList[T]:
+        return Cons(f(self.head), self.tail.map(f))
+
+    def filter(self, f: Callable[[S], bool]) -> ConsList[S]:
+        if f(self.head):
+            return Cons(self.head, self.tail.filter(f))
+        else:
+            return self.tail.filter(f)
+            
+    def fold_left(self, f: Callable[[S, T], S], init: S) -> S:
+            return self.tail.fold_left(f, f(init, self.head))
 
 class LazyConsList(Generic[S]):
     pass
@@ -91,31 +119,4 @@ class LazyCons(LazyConsList, Generic[S]):
             return LazyCons(LazyVal(self.head), self.tail.take(n - 1))
 
 
-def map_cons_list(f: Callable[[S], T], cons_list: ConsList[S]) -> ConsList[T]:
-    if cons_list == Empty():
-        return Empty()
-    else:
-        return Cons(f(cons_list.head), map_cons_list(f, cons_list.tail))
 
-def filter_cons_list(f: Callable[[S], bool], cons_list: ConsList[S]) -> ConsList[S]:
-    if cons_list == Empty():
-        return Empty()
-    else:
-        if f(cons_list.head):
-            return Cons(cons_list.head, filter_cons_list(f, cons_list.tail))
-        else:
-            return filter_cons_list(f, cons_list.tail)
-        
-def fold_left_cons_list(f: Callable[[S, T], S], cons_list: ConsList[T], init: S) -> S:
-    if cons_list.tail == Empty():
-        return f(cons_list.head, init)
-    elif cons_list == Empty():
-        return init
-    else:
-        return fold_left_cons_list(f, cons_list.tail, f(init, cons_list.head))
-
-def cons_list_maker(*args: S) -> Cons[S]:
-    if len(args) == 0:
-        return Empty()
-    else:
-        return Cons(args[0], cons_list_maker(*args[1:]))
