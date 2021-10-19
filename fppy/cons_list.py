@@ -14,6 +14,19 @@ class LazyVal(Generic[S]):
         return self.val
 
 class ConsList(Generic[S]):
+    """类实现的列表
+
+    如何新建：
+
+    >>> Cons.maker(1, 2, 3, 4)
+
+    列表操作：
+
+    >>> Cons.maker(1, 2, 3, 4)\\
+    >>>     .map(lambda x: x + 1)\\
+    >>>     .filter(lambda x: x % 2 == 0)\\
+    >>>     .fold_left(lambda x, y: x + y, 0) # 返回6
+    """
     pass
 
 @dataclass
