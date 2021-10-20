@@ -1,4 +1,4 @@
-from fppy.cons_list import ConsList, Empty, Cons, LazyEmpty, LazyConsList
+from fppy.cons_list import Empty, Cons
 import pytest
 from hypothesis import strategies as st, given
 

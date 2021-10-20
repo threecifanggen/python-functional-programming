@@ -15,16 +15,20 @@
 - [ ] 抽象代数
 - [x] 常用组合子
 - [ ] 列表类
-  - [x] 基于`Iterator`的惰性列表
+  - [x] 基于`Iterable`的惰性列表
   - [x] 基于元组定义的列表
-  - [ ] 基于类定义的列表
+  - [x] 基于类定义的列表
   - [ ] 基于类从头定义的惰性列表 
-- [ ] 偏函数
-- [ ] 基于性质测试(Property-based Testing)
+- [x] 偏函数
+- [x] 基于性质测试(Property-based Testing)
 - [x] 更多功能的函数装饰器
-- [x] Option类
 - [ ] State类
-- [ ] Either类
+- [ ] 设计模式
+  - [ ] 错误处理
+    - [x] Option类
+    - [ ] Either类
+  - [ ] Lens
+  - [ ] Cake
 
 ## 快速功能预览
 
