@@ -18,7 +18,7 @@
   - [x] 基于`Iterable`的惰性列表
   - [x] 基于元组定义的列表
   - [x] 基于类定义的列表
-  - [ ] 基于类从头定义的惰性列表 
+  - [x] 基于类从头定义的惰性列表 
 - [x] 偏函数
 - [x] 基于性质测试(Property-based Testing)
 - [x] 更多功能的函数装饰器
@@ -103,8 +103,20 @@ fold_left_cons_curry(lambda x, y: x + y)(0)(a) # 6
 from fppy.cons_list import Cons
 
 Cons.maker(1, 2, 3)\
-    .map(lambda x: x + 1)
-    .filter(lambda x: x % 2 == 0)
+    .map(lambda x: x + 1)\
+    .filter(lambda x: x % 2 == 0)\
+    .fold_left(lambda x, y: x + y, 0)
+```
+
+#### 从头实现的惰性列表
+
+```python
+from fppy.lazy_list_base import LazyCons
+
+LazyCons.from_iter(1)(lambda x: x)\
+    .map(lambda x: x + 1)\
+    .filter(lambda x: x % 2 == 0)\
+    .take(3)\
     .fold_left(lambda x, y: x + y, 0)
 ```
 
@@ -199,7 +211,7 @@ pf_greater_then_0 = PartialFunction\
 
 pf_less_then_0 = PartialFunction\
     .case(lambda x: x < 0)\
-    .then(lambda x: log(-x)
+    .then(lambda x: log(-x))
 
 pf = pf_greater_then_0.or_else(pf_less_then_0)
 ```

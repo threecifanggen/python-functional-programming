@@ -70,3 +70,9 @@ API Reference
 -------------------------------
 
 .. autoclass:: fppy.cons_list.ConsList
+
+
+通过类实现的惰性列表
+-------------------------------
+
+.. autoclass:: fppy.lazy_list_base.LazyConsList

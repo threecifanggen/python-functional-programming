@@ -41,6 +41,10 @@ def test_cons_equal(ls1, ls2, ls3, ls4):
         cons_apply(1),
         ls3
     )
+    assert not equal_cons(
+        ls2,
+        cons_apply(1, 2, 3)
+    )
 
 
 @pytest.mark.cons_base
