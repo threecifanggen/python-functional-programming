@@ -34,9 +34,10 @@ def cons_apply(*args: S) -> ConsListBase[S]:
 
 
 head: Callable[[ConsListBase[S]], S] = lambda cons_list: cons_list()[0]
-head.__doc__ == """获取List第一个元素"""
+head.__doc__ == """获取List第一个元素""" # pylint: disable=pointless-statement
+
 tail: Callable[[ConsListBase[S]], S] = lambda cons_list: cons_list()[1]
-tail.__doc__ == """截取第一个元素后的List"""
+tail.__doc__ == """截取第一个元素后的List"""  # pylint: disable=pointless-statement
 
 def equal_cons(this: ListBase[S], that: ListBase[S]) -> bool:
     """判断两个list是否相等
@@ -69,7 +70,10 @@ def print_cons_with_brackets(cons_list: ListBase[S]) -> str:
     if cons_list == ():
         return "()"
     else:
-        return f"({head(cons_list)}, {print_cons_with_brackets(tail(cons_list))})"
+        return (
+            f"({head(cons_list)}, "
+            f"{print_cons_with_brackets(tail(cons_list))})"
+        )
 
 def print_cons(cons_list: ListBase[S]) -> str:
     """打印ListBasr的逗点风格结果
@@ -119,7 +123,10 @@ def filter_cons(f: Callable[[S], bool], cons_list: ListBase[S]) -> ListBase[S]:
         else:
             return tl
 
-def fold_left_cons(f: Callable[[T, S], T], init: T, cons_list: ListBase[S]) -> ListBase[T]:
+def fold_left_cons(
+    f: Callable[[T, S], T],
+    init: T, cons_list: ListBase[S]
+    ) -> ListBase[T]:
     """ListBase的fold_left函数
 
     Args:
@@ -135,10 +142,12 @@ def fold_left_cons(f: Callable[[T, S], T], init: T, cons_list: ListBase[S]) -> L
     else:
         return fold_left_cons(f, f(init, head(cons_list)), tail(cons_list))
 
-    
+
 map_cons_curry = lambda f: lambda cons_list: map_cons(f, cons_list)
 map_cons_curry.__doc__="""科里化版本的map_cons"""
 filter_cons_curry = lambda f: lambda cons_list: filter_cons(f, cons_list)
 filter_cons_curry.__doc__="""科里化版本的filter_cons"""
-fold_left_cons_curry = lambda f: lambda init: lambda cons_list: fold_left_cons(f, init, cons_list)
+fold_left_cons_curry = lambda f: (
+    lambda init: lambda cons_list: fold_left_cons(f, init, cons_list)
+)
 fold_left_cons_curry.__doc__="""科里化版本的fold_left_cons"""
