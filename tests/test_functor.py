@@ -1,6 +1,9 @@
-from fppy.functor import BoxFunction, BoxValue, Box
+"""测试函子
+"""
 import pytest
 from hypothesis import strategies as st, given
+from fppy.functor import BoxFunction, BoxValue
+
 
 @pytest.mark.functor
 @given(x=st.integers())

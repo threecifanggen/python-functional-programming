@@ -6,4 +6,7 @@ T = TypeVar("T")
 T1 = TypeVar("T1")
 
 class GenericTypeVar(Generic[S]):
-    pass
+    """泛型类
+
+    方便直接定义值的类型
+    """
