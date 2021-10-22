@@ -1,10 +1,12 @@
+"""基本函数测试
+"""
+import pytest
 from fppy.base import (
     F_,
     compose,
     and_then,
-    I
+    I,
 )
-import pytest
 
 @pytest.mark.base
 @pytest.mark.parametrize(
@@ -25,7 +27,6 @@ def test_function_attribute():
     @F_
     def f(x):
         return x + 1
-    
     assert f.name == 'f'
 
     g = F_(lambda x: x * 2)
@@ -77,4 +78,3 @@ def test_compose_and_then():
     assert compose(f, I)(1) == f(1)
     assert compose(I, f, g)(1) == compose(f, g)(1)
     assert and_then(f, g, I, h)(1) == and_then(f, g, h)(1) == and_then(I, f, g, h)(1)
-
