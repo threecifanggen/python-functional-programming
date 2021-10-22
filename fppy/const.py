@@ -1,5 +1,6 @@
 """常量定义
 """
+import sys
 from .errors import ConstError
 
 class _const:
@@ -15,7 +16,6 @@ class _const:
         1
         >>> const.a = 2
         # raise ConstError
-    
     """
 
     def __setattr__(self, name, value):
@@ -24,5 +24,5 @@ class _const:
         else:
             self.__dict__[name] = value
 
-import sys
+
 sys.modules[__name__] = _const()
