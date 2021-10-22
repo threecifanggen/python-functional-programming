@@ -1,1 +1,9 @@
 [run]
+
+[report]
+exclude_lines =
+    # 测试抽象方法
+    pass
+
+    # 文件中的测试
+    if __name__ == .__main__.:

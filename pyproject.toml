@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fppy"
-version = "0.1.0"
+version = "0.2.0"
 description = "A implements of Functional Programming in Python."
 authors = ["huangbaochen <huangbaochenwo@live.com>"]
 
@@ -21,6 +21,7 @@ sphinxcontrib-mermaid = "^0.7.1"
 coverage-badge = "^1.0.2"
 pytest-html = "^3.1.1"
 hypothesis = "^6.23.2"
+pylint = "^2.11.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -91,7 +91,7 @@ class _Function(Generic[S, T]):
 
 F_: Callable[[Callable[[S], T]], _Function[S, T]] = _Function.F_
 
-F_.__doc__ = """"函数修饰器
+F_.__doc__ = """"函数修饰器。
 
 这是一个增强版的函数修饰器，可以做到和一般函数一样的使用，
 但是可以链式地串联其他函数。
