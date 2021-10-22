@@ -1,6 +1,8 @@
-from fppy.lazy_list_base import LazyCons, LazyEmpty
+"""测试从头实现的惰性列表
+"""
 import pytest
 from hypothesis import strategies as st, given
+from fppy.lazy_list_base import LazyCons, LazyEmpty
 
 
 @pytest.mark.lazy_list_base
