@@ -1,6 +1,7 @@
-from fppy.combinator import Y, Z
-
+"""测试组合子
+"""
 import pytest
+from fppy.combinator import Y, Z
 
 @pytest.mark.combinator
 def test_Y_combinator():
