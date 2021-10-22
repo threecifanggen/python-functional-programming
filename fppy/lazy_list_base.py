@@ -26,10 +26,12 @@ class LazyConsList(Generic[S]):
 
     其他方法包括： `map` ， `filter` ， `fold_left`
     """
-    pass
+
 
 @dataclass
 class LazyEmpty(LazyConsList, Generic[S]):
+    """空的惰性列表
+    """
     def map(self, _: Callable[[S], T]) -> LazyEmpty[S]:
         return self
     
