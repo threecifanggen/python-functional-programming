@@ -44,7 +44,7 @@ def test_apply():
 
     assert f(1) == 2
     assert f.apply(1) == 2
-    
+
 @pytest.mark.Function
 def test_function_and_then():
     """测试and_then函数
