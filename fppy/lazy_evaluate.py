@@ -1,3 +1,5 @@
+"""惰性求值
+"""
 from typing import Callable
 from .errors import NotVoidFunctionError
 from .gt import S
@@ -7,7 +9,7 @@ def lazy_property(func):
 
     如我们可以定义下面一个 `Circle` 的类，定义其中
     计算面积的属性为惰性属性
-    
+
     .. code-block:: python
 
         @dataclass
@@ -15,12 +17,12 @@ def lazy_property(func):
             x: float
             y: float
             r: float
-        
+
             @lazy_property
             def area(self):
                 print("computing")
                 return 3.14 * r * r
-    
+
     调用时结果如下，可以发现仅第一次发生了计算：
 
     >>> cir = Circle(0, 1, 1)
@@ -53,21 +55,20 @@ class LazyValue:
     def __setattr__(self, name: str, value: Callable[[], S]):
         if not callable(value) or value.__code__.co_argcount > 0:
             raise NotVoidFunctionError("value is not a void function")
-        super(LazyValue, self).__setattr__(name, (value, False))      
-        
+        super(LazyValue, self).__setattr__(name, (value, False)) # pylint: disable=super-with-arguments
+
     def __getattribute__(self, name: str):
         try:
-            _func, _have_called = super(LazyValue, self).__getattribute__(name)
+            _func, _have_called = super(LazyValue, self).__getattribute__(name) # pylint: disable=super-with-arguments
             if _have_called:
                 return _func
             else:
                 res = _func()
-                super(LazyValue, self).__setattr__(name, (res, True))
+                super(LazyValue, self).__setattr__(name, (res, True)) # pylint: disable=super-with-arguments
                 return res
         except:
             raise AttributeError(
-                "type object 'Lazy' has no attribute '{}'"
-                .format(name)
-            )
+                f"type object 'Lazy' has no attribute '{name}'"
+            ) from Exception
 
 lazy_val = LazyValue()
