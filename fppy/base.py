@@ -1,6 +1,8 @@
+"""基础函数
+"""
 from __future__ import annotations
 from functools import reduce
-from typing import Any, Callable, Generic, Iterable, List
+from typing import Any, Callable, Generic, Iterable
 from .gt import S0, S, T, T1
 
 def I(x: S) -> S:
@@ -14,6 +16,7 @@ def I(x: S) -> S:
     """
     return x
 
+
 def compose(*args: Callable) -> Callable:
     """数学中的compose
 
@@ -24,6 +27,7 @@ def compose(*args: Callable) -> Callable:
     """
     return reduce(lambda f, g: lambda x: f(g(x)), args)
 
+
 def and_then(*args: Callable[[Any], Any]) -> Callable[[Any], Any]:
     """和compose采用不同的fold方向的函数
     """
@@ -33,11 +37,11 @@ class _Function(Generic[S, T]):
     """加强版函数
     """
     f: Callable[[S], T]
-    
+
     def __init__(
             self,
             f: Callable[[S], T],
-            name: str | None = None 
+            name: str | None = None
         ):
         self.f = f
         if name is None:
@@ -62,14 +66,16 @@ class _Function(Generic[S, T]):
         """应用函数 = 执行函数
         """
         return self.f(*args, **kargs)
-    
+
     @staticmethod
     def F_(f: Callable[[S], T]) -> _Function[S, T]:
         """函数盒子/修饰器
         """
         return _Function(f, f.__name__)
 
-    def and_then(self, g: Callable[[T], T1] | _Function[T, T1]) -> _Function[S, T1]:
+    def and_then(
+        self, g: Callable[[T], T1] | _Function[T, T1]
+        ) -> _Function[S, T1]:
         """先执行本身，再执行g
         """
         temp_g = g.f if isinstance(g, _Function) else g
@@ -77,13 +83,24 @@ class _Function(Generic[S, T]):
             return temp_g(self.f(*args, **kargs))
         return _Function(helper)
 
-    def compose(self, g: Callable[[S0], S] | _Function[S0, S]) -> _Function[S0, T]:
+    def compose(
+        self,
+        g: Callable[[S0], S] | _Function[S0, S]
+        ) -> _Function[S0, T]:
+        """compose函数
+        """
         temp_g = g.f if isinstance(g, _Function) else g
         def helper(*args, **kargs):
             return self.f(temp_g(*args, **kargs))
         return _Function(helper)
 
-    def map(self, l: Iterable[S], to_lazy: bool = False) -> Iterable[T] | List[T]:
+    def map(
+        self,
+        l: Iterable[S],
+        to_lazy: bool = False
+        ) -> Iterable[T]:
+        """map函数
+        """
         if to_lazy:
             return map(self.f, l)
         else:

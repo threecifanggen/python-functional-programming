@@ -27,6 +27,7 @@
   - [ ] 错误处理
     - [x] Option类
     - [ ] Either类
+    - [ ] Try类
   - [ ] Lens
   - [ ] Cake
 

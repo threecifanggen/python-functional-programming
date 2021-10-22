@@ -1,8 +1,17 @@
+"""错误类
+"""
 class NoOtherCaseError(Exception):
-    pass
+    """无其他可能性错误
+    """
 
-class ConstError(TypeError): pass
+class ConstError(TypeError):
+    """常量错误
+    """
 
-class NotVoidFunctionError(TypeError): pass
+class NotVoidFunctionError(TypeError):
+    """不是无参数函数错误
+    """
 
-class NothingHasNoSuchMethod(Exception): pass
+class NothingHasNoSuchMethod(Exception):
+    """Nothing不包含此方法错误
+    """
