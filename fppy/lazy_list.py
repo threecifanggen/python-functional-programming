@@ -1,3 +1,5 @@
+"""惰性列表
+"""
 from typing import Iterable
 from dataclasses import dataclass
 from functools import reduce
@@ -12,7 +14,8 @@ from itertools import (
 
 @dataclass
 class Nil:
-    pass
+    """列表结尾
+    """
 
 class LazyList:
     def __init__(
@@ -28,13 +31,13 @@ class LazyList:
         except:
             x = Nil()
         return (x, self)
-    
+
     def map(self, f):
         return lazy_list(map(f, self.iter_))
-    
+
     def reduce(self, f):
         return reduce(f, self.iter_)
-    
+
     def foldleft(self, f, init):
         return reduce(f, self.iter_, init)
 
