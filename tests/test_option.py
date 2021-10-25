@@ -1,6 +1,9 @@
+"""测试Option
+"""
+import pytest
 from fppy.errors import NothingHasNoSuchMethod
 from fppy.option import Just, Nothing
-import pytest
+
 
 @pytest.mark.option
 def test_option_map():
@@ -21,7 +24,7 @@ def test_option_flat_map():
 @pytest.mark.option
 def test_option_get():
     assert Just(1).get == 1
-    
+
     with pytest.raises(NothingHasNoSuchMethod):
         assert Nothing().get
 
@@ -32,8 +35,8 @@ def test_option_get_or_else():
 
 @pytest.mark.option
 def test_option_collect():
-    from fppy.partial_function import PartialFunction
-    
+    from fppy.partial_function import PartialFunction # pylint: disable=import-outside-toplevel
+
     f = PartialFunction\
         .case(lambda x: x > 0)\
         .then(lambda x: x + 1)
