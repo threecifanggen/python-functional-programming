@@ -46,7 +46,8 @@ markers = [
     "cons_base: 用二元元组定义的list",
     "cons_list: 用类实现的list",
     "functor: 函子",
-    "lazy_list_base: 惰性列表类实现"
+    "lazy_list_base: 惰性列表类实现",
+    "lazy_list_lambda: 从lambda实现的惰性列表",
 ]
 addopts = [
     "--cov-config=.coveragerc"
