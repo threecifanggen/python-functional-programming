@@ -32,7 +32,7 @@ def filter_lazy_cons(f):
     return helper
 
 def collect_lazy_cons(lls):
-    if lls == ():
+    if tail == ():
         return ()
     elif head(lls) == ():
         return collect_lazy_cons(tail(lls))
