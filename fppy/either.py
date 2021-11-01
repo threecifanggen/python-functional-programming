@@ -1,9 +1,9 @@
 """Either类型
 """
 from __future__ import annotations
-from typing import Callable, Generic
+from typing import Callable, Generic, NoReturn
 from dataclasses import dataclass
-from .gt import S, T
+from .gt import S, T, T1
 from .option import Just
 
 @dataclass
@@ -35,6 +35,32 @@ class Right(_Either, Generic[S, T]):
         ) -> _Either[S, T]:
         pass
 
+    def map(
+        self,
+        f: Callable[[T], T1]
+        ) -> Right[S, T1]:
+        pass
+
+    @property
+    def is_left():
+        return False
+    
+    @property
+    def is_right():
+        return True
+
+    def for_each(
+        self,
+        f: Callable[[T], NoReturn]
+        ) -> Right[S, T]:
+        pass
+
+    def for_all(
+        self,
+        f: Callable[[T], bool]
+        ) -> bool:
+        True
+
 @dataclass
 class Left(_Either, Generic[S, T]):
     value: S
@@ -58,6 +84,32 @@ class Left(_Either, Generic[S, T]):
         f: Callable[[T], _Either[S, T]]
         ) -> _Either[S, T]:
         pass
+
+    def map(
+        self,
+        f: Callable[[T], T1]
+        ) -> Left[S, T1]:
+        pass
+
+    @property
+    def is_left():
+        return True
+    
+    @property
+    def is_right():
+        return False
+
+    def for_each(
+        self,
+        f: Callable[[T], NoReturn]
+        ) -> Left[S, T]:
+        pass
+
+    def for_all(
+        self,
+        _: Callable[[T], bool]
+        ) -> bool:
+        return True
 
 
 class Either(_Either, Generic[S, T]):

@@ -44,4 +44,20 @@ def test_either_flat_map():
     assert Right(1).flat_map(lambda x: Right(x + 1)) == Right(2)
     assert Right(1).flat_map(lambda x: Left(x + 1)) == Left(2)
     assert Left(1).flat_map(lambda x: Right(x + 1)) == Left(1)
-    
+
+@pytest.mark.either
+def test_either_map():
+    assert Right(1).map(str) == Right("1")
+    assert Left(1).map(lambda x: x + 1) == Left(1)
+
+@pytest.mark.either
+def test_check_right():
+    assert not Left(1).is_right
+    assert not Right(1).is_left
+    assert Left(1).is_left
+    assert Right(1).is_right
+
+@pytest.mark.either
+def test_check_right():
+    assert Right(1).for_each(print) == Right(1)
+    assert Left(1).for_each(print) == Left(1)
