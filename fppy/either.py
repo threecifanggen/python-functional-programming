@@ -24,7 +24,9 @@ class Right(_Either, Generic[S, T]):
             "must be an instance of Right")
 
     def contains(self, x: T) -> bool:
-        pass
+        """判断是否含有数据
+        """
+        return self.value == x
 
     def filter_or_else(
         self,
@@ -91,7 +93,9 @@ class Left(_Either, Generic[S, T]):
             "must be an instance of Left")
 
     def contains(self, x: S) -> bool:
-        pass
+        """判断是否含有数据
+        """
+        return self.value == x
 
     def filter_or_else(
         self,

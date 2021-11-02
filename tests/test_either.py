@@ -31,8 +31,8 @@ def test_either_exists():
 
 @pytest.mark.either
 def test_either_contain():
-    assert Right(1).contain(2) == False
-    assert Left(1).contain(2) == False
+    assert Right(1).contains(2) == False
+    assert Left(1).contains(2) == False
     assert Right(1).contains(1)
     assert Left(1).contains(1)
 
