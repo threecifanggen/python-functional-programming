@@ -58,7 +58,9 @@ class Right(_Either, Generic[S, T]):
         self,
         f: Callable[[T], T1]
         ) -> Right[S, T1]:
-        pass
+        """map
+        """
+        return Right(f(self.value))
 
     @property
     def is_left():
@@ -131,7 +133,9 @@ class Left(_Either, Generic[S, T]):
         self,
         f: Callable[[T], T1]
         ) -> Left[S, T1]:
-        pass
+        """map
+        """
+        return self
 
     @property
     def is_left():
