@@ -63,11 +63,11 @@ class Right(_Either, Generic[S, T]):
         return Right(f(self.value))
 
     @property
-    def is_left():
+    def is_left(self):
         return False
     
     @property
-    def is_right():
+    def is_right(self):
         return True
 
     def for_each(
@@ -138,11 +138,11 @@ class Left(_Either, Generic[S, T]):
         return self
 
     @property
-    def is_left():
+    def is_left(self):
         return True
     
     @property
-    def is_right():
+    def is_right(self):
         return False
 
     def for_each(
