@@ -30,7 +30,7 @@ def test_either_exists():
 
 
 @pytest.mark.either
-def test_either_contain():
+def test_either_contains():
     assert Right(1).contains(2) == False
     assert Left(1).contains(2) == False
     assert Right(1).contains(1)
@@ -39,8 +39,8 @@ def test_either_contain():
 @pytest.mark.either
 def test_either_filter_or_else():
     assert Right(1).filter_or_else(lambda x: x > 0, 3) == Right(1)
-    assert Right(1).filter_or_else(lambda x: x < 0, 3) == Right(1)
-    assert Left(1).filter_or_else(lambda x: x > 0, 3) == Right(3)
+    assert Right(1).filter_or_else(lambda x: x < 0, 3) == Left(3)
+    assert Left(1).filter_or_else(lambda x: x > 0, 3) == Left(1)
 
 
 @pytest.mark.either

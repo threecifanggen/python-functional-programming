@@ -31,9 +31,14 @@ class Right(_Either, Generic[S, T]):
     def filter_or_else(
         self,
         f: Callable[[T], bool],
-        x: T
-        ) -> Right[S, T]:
-        pass
+        x: S
+        ) -> _Either[S, T]:
+        """过滤
+        """
+        if f(self.value):
+            return self
+        else:
+            return Left(x)
 
     def flat_map(
         self,
@@ -100,9 +105,11 @@ class Left(_Either, Generic[S, T]):
     def filter_or_else(
         self,
         f: Callable[[T], bool],
-        x: T
-        ) -> Right[S, T]:
-        pass
+        x: S
+        ) -> Left[S, T]:
+        """过滤
+        """
+        return self
 
     def flat_map(
         self,
