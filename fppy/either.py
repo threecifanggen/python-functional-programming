@@ -64,23 +64,35 @@ class Right(_Either, Generic[S, T]):
 
     @property
     def is_left(self):
+        """判断是否是left
+        """
         return False
     
     @property
     def is_right(self):
+        """判断是否是right
+        """
         return True
 
     def for_each(
         self,
         f: Callable[[T], NoReturn]
         ) -> Right[S, T]:
-        pass
+        """运行副作用
+        """
+        f(self.value)
+        return self
 
     def for_all(
         self,
         f: Callable[[T], bool]
         ) -> bool:
-        True
+        """判断是否符合f
+        """
+        if f(self.value):
+            return True
+        else:
+            return False
 
     def or_else(
         self,
@@ -139,22 +151,30 @@ class Left(_Either, Generic[S, T]):
 
     @property
     def is_left(self):
+        """判断是否是left
+        """
         return True
     
     @property
     def is_right(self):
+        """判断是否是Right
+        """
         return False
 
     def for_each(
         self,
         f: Callable[[T], NoReturn]
         ) -> Left[S, T]:
-        pass
+        """运行副作用
+        """
+        return self
 
     def for_all(
         self,
         _: Callable[[T], bool]
         ) -> bool:
+        """判断是否成立
+        """
         return True
 
     def or_else(
