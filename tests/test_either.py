@@ -8,8 +8,8 @@ from fppy.option import Just
 
 @pytest.mark.either
 def test_either_cond():
-    assert Either.cond(True, lambda : 1, lambda : "2") == Right(1)
-    assert Either.cond(False, lambda: 1, lambda : "2") == Left("2")
+    assert Either.cond(True, 1, "2") == Right(1)
+    assert Either.cond(False, 1, "2") == Left("2")
 
 
 @pytest.mark.either
@@ -21,11 +21,13 @@ def test_either_unapply():
         Left.unapply(Right(1)) # require Left
     assert Left.unapply(Left(1)) == Just(1)
 
+
 @pytest.mark.either
 def test_either_exists():
     assert Right(1).exists(lambda x: x > 0)
     assert not Right(1).exists(lambda x: x < 0)
     assert not Left(1).exists(lambda _: True)
+
 
 @pytest.mark.either
 def test_either_contain():

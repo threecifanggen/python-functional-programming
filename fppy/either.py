@@ -152,8 +152,14 @@ class Either(_Either, Generic[S, T]):
 
     @classmethod
     def cond(
+        cls,
         cond_if: bool,
-        right_res: Callable[[], T],
-        left_res: Callable[[], S]
+        right_res: T,
+        left_res: S
         ) -> _Either[S, T]:
-        pass
+        """判断如果是返回Right否则返回Left
+        """
+        if cond_if:
+            return Right(right_res)
+        else:
+            return Left(left_res)
