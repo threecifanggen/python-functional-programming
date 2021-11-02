@@ -28,6 +28,11 @@ class Right(_Either, Generic[S, T]):
         """
         return self.value == x
 
+    def exists(
+        self,
+        f: Callable[[T], bool]) -> bool:
+        return f(self.value)
+
     def filter_or_else(
         self,
         f: Callable[[T], bool],
@@ -58,39 +63,57 @@ class Right(_Either, Generic[S, T]):
         self,
         f: Callable[[T], T1]
         ) -> Right[S, T1]:
-        pass
+        """map
+        """
+        return Right(f(self.value))
 
     @property
-    def is_left():
+    def is_left(self):
+        """判断是否是left
+        """
         return False
     
     @property
-    def is_right():
+    def is_right(self):
+        """判断是否是right
+        """
         return True
 
     def for_each(
         self,
         f: Callable[[T], NoReturn]
         ) -> Right[S, T]:
-        pass
+        """运行副作用
+        """
+        f(self.value)
+        return self
 
     def for_all(
         self,
         f: Callable[[T], bool]
         ) -> bool:
-        True
+        """判断是否符合f
+        """
+        if f(self.value):
+            return True
+        else:
+            return False
 
     def or_else(
         self,
         x: _Either[S, T]
         ) -> _Either[S, T]:
-        pass
+        """获取值
+        """
+        return self
 
     def get_or_else(
         self,
         x: T
         ) -> T:
-        pass
+        """获取值
+        """
+        return self.value
 
 
 @dataclass
@@ -109,6 +132,11 @@ class Left(_Either, Generic[S, T]):
         """判断是否含有数据
         """
         return self.value == x
+
+    def exists(
+        self,
+        f: Callable[[T], bool]) -> bool:
+        return False
 
     def filter_or_else(
         self,
@@ -131,39 +159,53 @@ class Left(_Either, Generic[S, T]):
         self,
         f: Callable[[T], T1]
         ) -> Left[S, T1]:
-        pass
+        """map
+        """
+        return self
 
     @property
-    def is_left():
+    def is_left(self):
+        """判断是否是left
+        """
         return True
     
     @property
-    def is_right():
+    def is_right(self):
+        """判断是否是Right
+        """
         return False
 
     def for_each(
         self,
         f: Callable[[T], NoReturn]
         ) -> Left[S, T]:
-        pass
+        """运行副作用
+        """
+        return self
 
     def for_all(
         self,
         _: Callable[[T], bool]
         ) -> bool:
+        """判断是否成立
+        """
         return True
 
     def or_else(
         self,
         x: _Either[S, T]
         ) -> _Either[S, T]:
-        pass
+        """获取值
+        """
+        return x
 
     def get_or_else(
         self,
         x: T
         ) -> T:
-        pass
+        """获取值
+        """
+        return x
     
 
 class Either(_Either, Generic[S, T]):

@@ -64,7 +64,7 @@ def test_either_check_right():
     assert Right(1).is_right
 
 @pytest.mark.either
-def test_either_right():
+def test_either_for_each():
     assert Right(1).for_each(print) == Right(1)
     assert Left(1).for_each(print) == Left(1)
 
