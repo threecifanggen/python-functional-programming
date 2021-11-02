@@ -28,6 +28,11 @@ class Right(_Either, Generic[S, T]):
         """
         return self.value == x
 
+    def exists(
+        self,
+        f: Callable[[T], bool]) -> bool:
+        return f(self.value)
+
     def filter_or_else(
         self,
         f: Callable[[T], bool],
@@ -98,13 +103,17 @@ class Right(_Either, Generic[S, T]):
         self,
         x: _Either[S, T]
         ) -> _Either[S, T]:
-        pass
+        """获取值
+        """
+        return self
 
     def get_or_else(
         self,
         x: T
         ) -> T:
-        pass
+        """获取值
+        """
+        return self.value
 
 
 @dataclass
@@ -123,6 +132,11 @@ class Left(_Either, Generic[S, T]):
         """判断是否含有数据
         """
         return self.value == x
+
+    def exists(
+        self,
+        f: Callable[[T], bool]) -> bool:
+        return False
 
     def filter_or_else(
         self,
@@ -181,13 +195,17 @@ class Left(_Either, Generic[S, T]):
         self,
         x: _Either[S, T]
         ) -> _Either[S, T]:
-        pass
+        """获取值
+        """
+        return x
 
     def get_or_else(
         self,
         x: T
         ) -> T:
-        pass
+        """获取值
+        """
+        return x
     
 
 class Either(_Either, Generic[S, T]):
