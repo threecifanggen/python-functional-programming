@@ -23,7 +23,9 @@ def test_either_unapply():
 
 @pytest.mark.either
 def test_either_exists():
-    pass
+    assert Right(1).exists(lambda x: x > 0)
+    assert not Right(1).exists(lambda x: x < 0)
+    assert not Left(1).exists(lambda _: True)
 
 @pytest.mark.either
 def test_either_contain():
@@ -51,13 +53,27 @@ def test_either_map():
     assert Left(1).map(lambda x: x + 1) == Left(1)
 
 @pytest.mark.either
-def test_check_right():
+def test_either_check_right():
     assert not Left(1).is_right
     assert not Right(1).is_left
     assert Left(1).is_left
     assert Right(1).is_right
 
 @pytest.mark.either
-def test_check_right():
+def test_either_right():
     assert Right(1).for_each(print) == Right(1)
     assert Left(1).for_each(print) == Left(1)
+
+
+@pytest.mark.either
+def test_either_for_all():
+    assert Right(1).for_all(lambda x: x > 0)
+    assert not Right(1).for_all(lambda x: x < 0)
+    assert Left(1).for_all(lambda x: x < 0)
+
+@pytest.mark.either
+def test_either_get_or_else():
+    assert Right(1).get_or_else(2) == 1
+    assert Left(1).get_or_else(2) == 2
+    assert Right(1).or_else(Left(1)) == Right(1)
+    assert Left(1).or_else(Left(2)) == Left(2)

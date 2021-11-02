@@ -61,6 +61,19 @@ class Right(_Either, Generic[S, T]):
         ) -> bool:
         True
 
+    def or_else(
+        self,
+        x: _Either[S, T]
+        ) -> _Either[S, T]:
+        pass
+
+    def get_or_else(
+        self,
+        x: T
+        ) -> T:
+        pass
+
+
 @dataclass
 class Left(_Either, Generic[S, T]):
     value: S
@@ -111,6 +124,18 @@ class Left(_Either, Generic[S, T]):
         ) -> bool:
         return True
 
+    def or_else(
+        self,
+        x: _Either[S, T]
+        ) -> _Either[S, T]:
+        pass
+
+    def get_or_else(
+        self,
+        x: T
+        ) -> T:
+        pass
+    
 
 class Either(_Either, Generic[S, T]):
     value: T
