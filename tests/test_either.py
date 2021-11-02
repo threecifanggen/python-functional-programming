@@ -48,6 +48,8 @@ def test_either_flat_map():
     assert Right(1).flat_map(lambda x: Right(x + 1)) == Right(2)
     assert Right(1).flat_map(lambda x: Left(x + 1)) == Left(2)
     assert Left(1).flat_map(lambda x: Right(x + 1)) == Left(1)
+    with pytest.raises(TypeError):
+        Right(1).flat_map(lambda x: x + 1)
 
 @pytest.mark.either
 def test_either_map():

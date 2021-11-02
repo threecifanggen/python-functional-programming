@@ -44,7 +44,15 @@ class Right(_Either, Generic[S, T]):
         self,
         f: Callable[[T], _Either[S, T]]
         ) -> _Either[S, T]:
-        pass
+        """flat_map
+        """
+        res = f(self.value)
+        if isinstance(res, _Either):
+            return res
+        else:
+            raise TypeError(
+                "f must return an Either Object"
+            )
 
     def map(
         self,
@@ -115,7 +123,9 @@ class Left(_Either, Generic[S, T]):
         self,
         f: Callable[[T], _Either[S, T]]
         ) -> _Either[S, T]:
-        pass
+        """flat_map
+        """
+        return self
 
     def map(
         self,
