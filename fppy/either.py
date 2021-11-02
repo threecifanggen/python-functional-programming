@@ -16,8 +16,12 @@ class Right(_Either, Generic[S, T]):
     value: T
 
     @classmethod
-    def unapply(right: Right[S, T]) -> Just[T]:
-        pass
+    def unapply(cls, right: Right[S, T]) -> Just[T]:
+        if isinstance(right, Right):
+            return Just(right.value)
+        else:
+            raise TypeError("Right.unapply's parameter "
+            "must be an instance of Right")
 
     def contains(self, x: T) -> bool:
         pass
@@ -79,8 +83,12 @@ class Left(_Either, Generic[S, T]):
     value: S
  
     @classmethod
-    def unapply(right: Right[S, T]) -> Just[T]:
-        pass
+    def unapply(cls, left: Right[S, T]) -> Just[T]:
+        if isinstance(left, Left):
+            return Just(left.value)
+        else:
+            raise TypeError("Left.unapply's parameter "
+            "must be an instance of Left")
 
     def contains(self, x: S) -> bool:
         pass
