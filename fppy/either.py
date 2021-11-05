@@ -1,22 +1,29 @@
 """Either类型
 """
 from __future__ import annotations
+from abc import ABC
 from typing import Callable, Generic, NoReturn
 from dataclasses import dataclass
 from .gt import S, T, T1
 from .option import Just
 
 @dataclass
-class _Either(Generic[S, T]):
+class _Either(ABC, Generic[S, T]):
+    """Either的Base
+    """
     value: S
 
 
 @dataclass
 class Right(_Either, Generic[S, T]):
+    """Right类
+    """
     value: T
 
     @classmethod
     def unapply(cls, right: Right[S, T]) -> Just[T]:
+        """uapply
+        """
         if isinstance(right, Right):
             return Just(right.value)
         else:
@@ -31,6 +38,8 @@ class Right(_Either, Generic[S, T]):
     def exists(
         self,
         f: Callable[[T], bool]) -> bool:
+        """判断是否存在符合f的元素
+        """
         return f(self.value)
 
     def filter_or_else(
@@ -72,7 +81,7 @@ class Right(_Either, Generic[S, T]):
         """判断是否是left
         """
         return False
-    
+
     @property
     def is_right(self):
         """判断是否是right
@@ -101,7 +110,7 @@ class Right(_Either, Generic[S, T]):
 
     def or_else(
         self,
-        x: _Either[S, T]
+        _: _Either[S, T]
         ) -> _Either[S, T]:
         """获取值
         """
@@ -109,7 +118,7 @@ class Right(_Either, Generic[S, T]):
 
     def get_or_else(
         self,
-        x: T
+        _: T
         ) -> T:
         """获取值
         """
@@ -118,10 +127,14 @@ class Right(_Either, Generic[S, T]):
 
 @dataclass
 class Left(_Either, Generic[S, T]):
+    """Left对象
+    """
     value: S
- 
+
     @classmethod
     def unapply(cls, left: Right[S, T]) -> Just[T]:
+        """unapply
+        """
         if isinstance(left, Left):
             return Just(left.value)
         else:
@@ -135,13 +148,15 @@ class Left(_Either, Generic[S, T]):
 
     def exists(
         self,
-        f: Callable[[T], bool]) -> bool:
+        _: Callable[[T], bool]) -> bool:
+        """判断是否存在符合f的元素
+        """
         return False
 
     def filter_or_else(
         self,
-        f: Callable[[T], bool],
-        x: S
+        _: Callable[[T], bool],
+        __: S
         ) -> Left[S, T]:
         """过滤
         """
@@ -149,7 +164,7 @@ class Left(_Either, Generic[S, T]):
 
     def flat_map(
         self,
-        f: Callable[[T], _Either[S, T]]
+        _: Callable[[T], _Either[S, T]]
         ) -> _Either[S, T]:
         """flat_map
         """
@@ -157,7 +172,7 @@ class Left(_Either, Generic[S, T]):
 
     def map(
         self,
-        f: Callable[[T], T1]
+        _: Callable[[T], T1]
         ) -> Left[S, T1]:
         """map
         """
@@ -168,7 +183,7 @@ class Left(_Either, Generic[S, T]):
         """判断是否是left
         """
         return True
-    
+
     @property
     def is_right(self):
         """判断是否是Right
@@ -177,7 +192,7 @@ class Left(_Either, Generic[S, T]):
 
     def for_each(
         self,
-        f: Callable[[T], NoReturn]
+        _: Callable[[T], NoReturn]
         ) -> Left[S, T]:
         """运行副作用
         """
@@ -206,16 +221,18 @@ class Left(_Either, Generic[S, T]):
         """获取值
         """
         return x
-    
+
 
 class Either(_Either, Generic[S, T]):
+    """Either的同名对象
+    """
     value: T
 
-    def __new__(self, value):
+    def __new__(cls, value):
         """新建
         """
         return Right(value)
-    
+
     def apply(self, value) -> Right[S, T]:
         """应用
         """
