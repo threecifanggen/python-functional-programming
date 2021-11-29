@@ -9,13 +9,15 @@ def make_lazy_cons(*args):
     else:
         return lazy_cons(lambda: args[0], lambda: make_lazy_cons(*args[1:]))
 
-head = lambda lls: lls[0]()
-tail = lambda lls: lls[1]()
+head = lambda lls: lls[0]() if callable(lls[0]) else lls[0]
+tail = lambda lls: lls[1]() if callable(lls[1]) else lls[1]
 
 def iterate_lazy_cons(start):
+    """生成LazyList
+    """
     def helper(f):
         return lazy_cons(
-            lambda: start, 
+            lambda: start,
             lambda: iterate_lazy_cons(f(start))(f)
         )
     return helper
@@ -32,7 +34,7 @@ def filter_lazy_cons(f):
     return helper
 
 def collect_lazy_cons(lls):
-    if tail == ():
+    if lls == ():
         return ()
     elif head(lls) == ():
         return collect_lazy_cons(tail(lls))

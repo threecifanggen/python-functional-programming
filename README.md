@@ -26,7 +26,7 @@
 - [ ] 设计模式
   - [ ] 错误处理
     - [x] Option类
-    - [ ] Either类
+    - [x] Either类
     - [ ] Try类
   - [ ] Lens
   - [ ] Cake

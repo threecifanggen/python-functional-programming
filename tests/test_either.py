@@ -1,7 +1,5 @@
 """测试
 """
-from _pytest.compat import assert_never
-import py
 import pytest
 from fppy.either import Either, Left, Right
 from fppy.option import Just
@@ -31,10 +29,10 @@ def test_either_exists():
 
 @pytest.mark.either
 def test_either_contains():
-    assert Right(1).contains(2) == False
-    assert Left(1).contains(2) == False
-    assert Right(1).contains(1)
-    assert Left(1).contains(1)
+    assert Right(1).contains(2) is False
+    assert Left(1).contains(2) is False
+    assert Right(1).contains(1) is True
+    assert Left(1).contains(1) is True
 
 @pytest.mark.either
 def test_either_filter_or_else():
@@ -58,10 +56,10 @@ def test_either_map():
 
 @pytest.mark.either
 def test_either_check_right():
-    assert not Left(1).is_right
-    assert not Right(1).is_left
-    assert Left(1).is_left
-    assert Right(1).is_right
+    assert Left(1).is_right is False
+    assert Right(1).is_left is False
+    assert Left(1).is_left is True
+    assert Right(1).is_right is True
 
 @pytest.mark.either
 def test_either_for_each():
