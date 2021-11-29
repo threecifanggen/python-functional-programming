@@ -47,7 +47,7 @@ def test_lazy_list_lambda_take_and_iterate():
         take_lazy_cons(5),
         collect_lazy_cons
     )(iterate_lazy_cons(1)(lambda x: x + 1)) == collect_lazy_cons(
-        make_lazy_cons(0, 2, 4, 6, 8)
+        make_lazy_cons(1, 2, 3, 4, 5)
     )
 
 
@@ -56,4 +56,4 @@ def test_lazy_list_lambda_fold_left():
     assert and_then(
         take_lazy_cons(5),
         fold_left_lazy_cons(lambda x, y: x + y)(0)
-    )(iterate_lazy_cons(1)(lambda x: x + 1)) == 10
+    )(iterate_lazy_cons(1)(lambda x: x + 1)) == 15

@@ -121,7 +121,7 @@ def filter_cons(f: Callable[[S], bool], cons_list: ListBase[S]) -> ListBase[S]:
         if f(hd):
             return cons(hd, filter_cons(f, tl))
         else:
-            return tl
+            return filter_cons(f, tl)
 
 def fold_left_cons(
     f: Callable[[T, S], T],
