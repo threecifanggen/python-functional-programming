@@ -70,6 +70,11 @@ class Fail(_Try[S, T]):
         """
         return other
 
+    def get_error_input(self) -> T:
+        """获取报错时的输入
+        """
+        return self.value
+
 @dataclass
 class Success(_Try[S, T]):
     """成功类
