@@ -22,7 +22,10 @@ coverage-badge = "^1.0.2"
 pytest-html = "^3.1.1"
 hypothesis = "^6.23.2"
 pylint = "^2.11.1"
-mypy = "^0.910"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 markers = [
@@ -42,7 +45,6 @@ markers = [
     "lazy: 惰性值",
     "cons_base: 用二元元组定义的list",
     "cons_list: 用类实现的list",
-    "try_monad: Try单子",
     "functor: 函子",
     "lazy_list_base: 惰性列表类实现",
     "lazy_list_lambda: 从lambda实现的惰性列表",
@@ -54,8 +56,4 @@ addopts = [
 [tool.poetry.scripts]
 docs = "poetry_scripts:docs"
 tests = "poetry_scripts:test_with_badge"
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
 
