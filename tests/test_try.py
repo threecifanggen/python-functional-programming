@@ -1,7 +1,7 @@
 '''
 Author: huangbaochen<huangbaochenwo@live.com>
 Date: 2021-12-11 20:04:19
-LastEditTime: 2021-12-11 20:54:05
+LastEditTime: 2021-12-11 21:07:14
 LastEditors: huangbaochen<huangbaochenwo@live.com>
 Description: 测试Try单子
 No MERCY
@@ -48,3 +48,14 @@ def test_try_monad_flat_map():
 
     with pytest.raises(TypeError):
         Success(1).flat_map(lambda x: x + 1)
+
+@pytest.mark.try_monad
+def test_try_monad_eq():
+    assert Fail(ZeroDivisionError('division by zero'), 1) ==\
+        Fail(ZeroDivisionError('division by zero'), 1)
+    
+    assert Fail(ZeroDivisionError('division by'), 1) !=\
+        Fail(ZeroDivisionError('division by zero'), 1)
+
+    assert Fail(ZeroDivisionError('division by zero'), 0) !=\
+        Fail(ZeroDivisionError('division by zero'), 1)

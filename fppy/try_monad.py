@@ -1,7 +1,7 @@
 '''
 Author: huangbaochen<huangbaochenwo@live.com>
 Date: 2021-12-11 15:00:15
-LastEditTime: 2021-12-11 20:51:04
+LastEditTime: 2021-12-11 21:05:18
 LastEditors: huangbaochen<huangbaochenwo@live.com>
 Description: Try单子
 No MERCY
@@ -50,6 +50,13 @@ class Fail(Generic[S], _Try):
         """flat_map方法
         """
         return self
+
+    def __eq__(self, __o: object) -> bool:
+        return (
+            self.error.args == __o.error.args
+        ) and (
+            self.value == __o.value
+        )  
 
 @dataclass
 class Success(Generic[S], _Try):
