@@ -57,13 +57,14 @@ def f(x):
 ### 常量定义
 
 ```python
-from fppy import const
-
+>>> from fppy.const import Const
+>>>
+>>> const = Const()
 >>> const.a = 1
 >>> const.a
 1
 >>> const.a = 2
-# Error
+# raise ConstError
 ```
 
 ### 列表类
