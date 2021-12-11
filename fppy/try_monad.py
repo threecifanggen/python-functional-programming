@@ -1,7 +1,7 @@
 '''
 Author: huangbaochen<huangbaochenwo@live.com>
 Date: 2021-12-11 15:00:15
-LastEditTime: 2021-12-11 21:05:18
+LastEditTime: 2021-12-11 21:14:22
 LastEditors: huangbaochen<huangbaochenwo@live.com>
 Description: Try单子
 No MERCY
@@ -52,11 +52,18 @@ class Fail(Generic[S], _Try):
         return self
 
     def __eq__(self, __o: object) -> bool:
+        """重写等于逻辑
+        """
         return (
             self.error.args == __o.error.args
         ) and (
             self.value == __o.value
-        )  
+        )
+
+    def get(self):
+        """获取错误类型
+        """
+        return self.error
 
 @dataclass
 class Success(Generic[S], _Try):
@@ -99,9 +106,19 @@ class Success(Generic[S], _Try):
         else:
             return res
 
+    def get(self):
+        """获取值
+        """
+        return self.value
+
 class Try(_Try):
     """Try同名类（为了实现apply）
     """
+    def __new__(cls, x: S) -> Success[S]:
+        """应用
+        """
+        return Success(x)
+
     @classmethod
     def apply(cls, x):
         """应用
