@@ -1,7 +1,7 @@
 '''
 Author: huangbaochen<huangbaochenwo@live.com>
 Date: 2021-12-11 20:04:19
-LastEditTime: 2021-12-11 21:17:36
+LastEditTime: 2021-12-11 21:26:40
 LastEditors: huangbaochen<huangbaochenwo@live.com>
 Description: 测试Try单子
 No MERCY
@@ -71,3 +71,10 @@ def test_try_monad_get():
 
     # pylint: disable=no-member
     assert Try("s").get() == "s"
+
+@pytest.mark.try_monad
+def test_try_monad_get_or_else():
+    assert Fail(ZeroDivisionError('division by zero'),  1)\
+        .get_or_else(2) == 2
+
+    assert Success(1).get_or_else(2) == 1

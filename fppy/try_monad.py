@@ -1,7 +1,7 @@
 '''
 Author: huangbaochen<huangbaochenwo@live.com>
 Date: 2021-12-11 15:00:15
-LastEditTime: 2021-12-11 21:14:22
+LastEditTime: 2021-12-11 21:28:16
 LastEditors: huangbaochen<huangbaochenwo@live.com>
 Description: Try单子
 No MERCY
@@ -14,19 +14,19 @@ from fppy.option import Just, Nothing
 from .gt import S, T
 
 
-class _Try:
+class _Try(Generic[S, T]):
     """Try 单子抽象类
     """
 
 @dataclass
-class Fail(Generic[S], _Try):
+class Fail(_Try[S, T]):
     """失败类
     """
     error: Exception
     value: S | None = None
 
     @classmethod
-    def unapply(cls, x: Fail) -> Nothing:
+    def unapply(cls, x: Fail[S, T]) -> Nothing:
         """unapply方法，转为option对象
         """
         if not isinstance(x, Fail):
@@ -38,7 +38,7 @@ class Fail(Generic[S], _Try):
             return Nothing()
 
     # pylint: disable=unused-argument
-    def map(self, func: Callable[[S], T]) -> Success[T] | Fail[S]:
+    def map(self, func: Callable[[S], T]) -> Success[S, T] | Fail[S, T]:
         """map方法
         """
         return self
@@ -46,7 +46,7 @@ class Fail(Generic[S], _Try):
     # pylint: disable=unused-argument
     def flat_map(
         self,
-        func: Callable[[S], _Try]):
+        func: Callable[[S], _Try]) -> _Try:
         """flat_map方法
         """
         return self
@@ -65,14 +65,19 @@ class Fail(Generic[S], _Try):
         """
         return self.error
 
+    def get_or_else(self, other: S) -> S:
+        """获取值
+        """
+        return other
+
 @dataclass
-class Success(Generic[S], _Try):
+class Success(_Try[S, T]):
     """成功类
     """
     value: S | None = None
 
     @classmethod
-    def unapply(cls, x: Success) -> Just:
+    def unapply(cls, x: Success[S, T]) -> Just:
         """unapply方法，转为option对象
         """
         if not isinstance(x, Success):
@@ -94,7 +99,7 @@ class Success(Generic[S], _Try):
 
     def flat_map(
         self,
-        func: Callable[[S], _Try]):
+        func: Callable[[S], _Try[S, T]]) -> _Try[S, T]:
         """flat_map方法
         """
         res = func(self.value)
@@ -111,16 +116,22 @@ class Success(Generic[S], _Try):
         """
         return self.value
 
-class Try(_Try):
+    # pylint: disable=unused-argument
+    def get_or_else(self, other: S):
+        """获取值
+        """
+        return self.value
+
+class Try(_Try[S, T]):
     """Try同名类（为了实现apply）
     """
-    def __new__(cls, x: S) -> Success[S]:
+    def __new__(cls, x: S) -> Success[S, T]:
         """应用
         """
         return Success(x)
 
     @classmethod
-    def apply(cls, x):
+    def apply(cls, x: S) -> Success[S, T]:
         """应用
         """
         return Success(x)
