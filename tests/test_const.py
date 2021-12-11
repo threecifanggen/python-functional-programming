@@ -1,7 +1,13 @@
-"""测试常量
-"""
+'''
+Author: huangbaochen<huangbaochenwo@live.com>
+Date: 2021-12-11 15:00:47
+LastEditTime: 2021-12-11 21:40:11
+LastEditors: huangbaochen<huangbaochenwo@live.com>
+Description: 常量测试
+No MERCY
+'''
 import pytest
-from fppy import const
+from fppy.const import Const
 from fppy.errors import ConstError
 
 
@@ -9,9 +15,10 @@ from fppy.errors import ConstError
 def test_const():
     """测试常量
     """
-    const.a = 1
-    assert const.a == 1
+    c = Const()
+    c.a = 1
+    assert c.a == 1
 
     with pytest.raises(ConstError):
-        const.b = 1
-        const.b = 2
+        c.b = 1
+        c.b = 2
