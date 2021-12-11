@@ -326,19 +326,4 @@ Nothing()
 
 (待完善)
 
-### 3. Try
-
-`Try`单子时一个非常方便地处理错误的类，它的逻辑时传递错误类一直到最后处理，可以获取到错误发生时的错误类型和输入值，方便调试：
-
-```python
->>> from fppy.try_monad import Try
->>> res = Try(1).map(lambda x: x / 0).map(lambda x: x + 1)
->>> res.error
-ZeroDivisionError('division by zero')
->>> res.get_or_else(2)
-2
->>> res.get_error_input()
-1
-```
-
 
