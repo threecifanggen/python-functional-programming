@@ -1,5 +1,11 @@
-"""抽象代数模块
-"""
+'''
+Author: huangbaochen<huangbaochenwo@live.com>
+Date: 2021-12-11 17:16:42
+LastEditTime: 2021-12-12 20:07:34
+LastEditors: huangbaochen<huangbaochenwo@live.com>
+Description: 基本抽象代数
+No MERCY
+'''
 from __future__ import annotations
 from abc import abstractmethod, ABC
 from functools import reduce
@@ -69,9 +75,11 @@ class Monoid(SemiGroup, ABC):
             return self.join(it[0], it[1])
         if len_of_iter == 1:
             return self.join(self.unit, it[0])
+        if len_of_iter == 0:
+            return self.unit
         return self.join(
-            self.dfs_reduce(iter[:floor(len_of_iter/2)]),
-            self.dfs_reduce(iter[floor(len_of_iter/2):])
+            self.dfs_reduce(it[:floor(len_of_iter/2)]),
+            self.dfs_reduce(it[floor(len_of_iter/2):])
         )
 
     @classmethod
@@ -83,17 +91,3 @@ class Monoid(SemiGroup, ABC):
             l[i * k + min(i, j):(i + 1) * k + min(i + 1, j)]
                 for i in range(n)
             )
-
-
-class Functor(ABC):
-    """函子
-    """
-    @abstractmethod
-    def map(self, f):
-        """map操作
-        """
-
-
-class Monad(Monoid, Functor, ABC):
-    """单子
-    """

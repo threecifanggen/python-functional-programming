@@ -1,5 +1,11 @@
-"""抽象代数测试
-"""
+'''
+Author: huangbaochen<huangbaochenwo@live.com>
+Date: 2021-12-11 14:56:27
+LastEditTime: 2021-12-12 20:06:43
+LastEditors: huangbaochen<huangbaochenwo@live.com>
+Description: 抽象代数测试
+No MERCY
+'''
 import pytest
 from pathos.threading import ThreadPool
 from fppy.abstract_algebra import (
@@ -74,3 +80,13 @@ def test_semi_group():
 
     add = AddSemiGroup()
     assert add.join(1, 2) == 3
+
+
+@pytest.mark.algebra
+def test_monoid_dfs_reduce(SM):
+    """测试深度优先的reduce
+    """
+    assert SM.dfs_reduce([1, 2, 3]) == 6
+    assert SM.dfs_reduce([1, 2]) == 3
+    assert SM.dfs_reduce([1]) == 1
+    assert SM.dfs_reduce([]) == 0
