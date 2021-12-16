@@ -46,6 +46,7 @@ markers = [
     "functor: 函子",
     "lazy_list_base: 惰性列表类实现",
     "lazy_list_lambda: 从lambda实现的惰性列表",
+    "random: 随机数",
 ]
 addopts = [
     "--cov-config=.coveragerc"
