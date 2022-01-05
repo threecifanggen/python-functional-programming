@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fppy-learn"
-version = "0.2.0.post220105"
+version = "0.3.0-alpha01"
 description = "A implements of Functional Programming in Python."
 authors = ["huangbaochen <huangbaochenwo@live.com>"]
 keywords = ["functional_programming", "lambda"]
