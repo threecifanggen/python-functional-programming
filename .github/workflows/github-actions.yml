@@ -7,10 +7,8 @@ jobs:
   Initialization-Actions:
     runs-on: ubuntu-latest # 指定系统
     steps:
-      - name: Environment setup
-        uses: actions/checkout@v2
-        
       - name: publish
+        uses: actions/checkout@v2
         with:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
