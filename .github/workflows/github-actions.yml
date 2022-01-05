@@ -10,6 +10,8 @@ jobs:
       - name: Environment setup
         uses: actions/checkout@v2
         working-directory: ./
+        
+      - name: publish
         with:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
