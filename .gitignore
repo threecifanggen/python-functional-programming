@@ -149,3 +149,5 @@ fppy.egg-info
 .empty
 
 requirements.txt
+
+_site
