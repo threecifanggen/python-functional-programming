@@ -1,8 +1,24 @@
 [tool.poetry]
-name = "fppy"
+name = "fppy-learn"
 version = "0.2.0"
 description = "A implements of Functional Programming in Python."
 authors = ["huangbaochen <huangbaochenwo@live.com>"]
+keywords = ["functional_programming", "lambda"]
+homepage = "https://github.com/threecifanggen/python-functional-programming"
+repository = "https://github.com/threecifanggen/python-functional-programming"
+readme = "README.md"
+license = "MIT"
+include = [
+    "LICENSE"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+packages = [
+    { include = "fppy" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -59,4 +75,3 @@ tests = "poetry_scripts:test_with_badge"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-
