@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fppy-learn"
-version = "0.2.0"
+version = "0.2.0.post220105"
 description = "A implements of Functional Programming in Python."
 authors = ["huangbaochen <huangbaochenwo@live.com>"]
 keywords = ["functional_programming", "lambda"]
@@ -9,7 +9,8 @@ repository = "https://github.com/threecifanggen/python-functional-programming"
 readme = "README.md"
 license = "MIT"
 include = [
-    "LICENSE"
+    "LICENSE",
+    "badge/cov-badge.svg"
 ]
 classifiers = [
     "Programming Language :: Python :: 3",

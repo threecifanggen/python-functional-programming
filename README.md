@@ -6,7 +6,7 @@
 
 依赖：
 
-![Python](https://img.shields.io/badge/Python-3.8-green?logo=python) ![Python](https://img.shields.io/badge/pathos-0.2.6-green) ![Python](https://img.shields.io/badge/drill-1.2.0-green)
+![Python](https://img.shields.io/badge/Python-3.10-green?logo=python) ![Python](https://img.shields.io/badge/pathos-0.2.6-green) ![Python](https://img.shields.io/badge/drill-1.2.0-green)
 
 一个基于`python`的函数式编程类库，仅做学习使用。主要功能如下：
 
@@ -27,9 +27,28 @@
   - [ ] 错误处理
     - [x] Option类
     - [x] Either类
-    - [ ] Try类
+    - [x] Try类
   - [ ] Lens
   - [ ] Cake
+
+## 如何安装
+
+从[PYPI](https://pypi.org/)软件库：
+
+```bash
+pip install fppy-learn
+```
+
+下载源码自己安装：
+
+```python
+pip install poetry
+
+git clone https://github.com/threecifanggen/python-functional-programming.git
+cd python-functional-programming
+
+poetry install
+```
 
 ## 快速功能预览
 
