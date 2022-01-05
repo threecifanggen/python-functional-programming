@@ -2,7 +2,7 @@
 
 开发状态：
 
-![coverage](badge/cov-badge.svg) ![open-issues](https://img.shields.io/github/issues/threecifanggen/python-functional-programming) ![close-issues](https://img.shields.io/github/issues-closed/threecifanggen/python-functional-programming) ![version](https://img.shields.io/github/v/release/threecifanggen/python-functional-programming?include_prereleases)
+![coverage](badge/cov-badge.svg) ![open-issues](https://img.shields.io/github/issues/threecifanggen/python-functional-programming) ![close-issues](https://img.shields.io/github/issues-closed/threecifanggen/python-functional-programming) ![version](https://img.shields.io/github/v/release/threecifanggen/python-functional-programming?include_prereleases) ![travis-ci](https://img.shields.io/travis/threecifanggen/python-functional-programming/master)
 
 依赖：
 
@@ -12,7 +12,7 @@
 
 - [x] 常量定义
 - [x] 惰性求值/惰性属性
-- [ ] 抽象代数
+- [x] 抽象代数
 - [x] 常用组合子
 - [x] 列表类
   - [x] 基于`Iterable`的惰性列表
