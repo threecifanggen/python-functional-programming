@@ -1,0 +1,13 @@
+name: Publish fppy-learn to PYPI
+on: 
+  pull_request:
+    branches:
+      - main # 仅当pull request到main的时候操作
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest # 指定系统
+    steps:
+      - run: pip install poetry
+      - run: poetry install
+      - run: poetry build
+      - run: poetry publish
