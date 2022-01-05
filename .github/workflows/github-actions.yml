@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest # 指定系统
     steps:
       - name: publish
-        with:
+        env:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
         run: 
