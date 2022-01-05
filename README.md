@@ -2,7 +2,7 @@
 
 开发状态：
 
-![coverage](badge/cov-badge.svg) ![open-issues](https://img.shields.io/github/issues/threecifanggen/python-functional-programming) ![close-issues](https://img.shields.io/github/issues-closed/threecifanggen/python-functional-programming) ![version](https://img.shields.io/github/v/release/threecifanggen/python-functional-programming?include_prereleases) ![travis-ci](https://img.shields.io/travis/threecifanggen/python-functional-programming/master)
+![coverage](badge/cov-badge.svg) ![open-issues](https://img.shields.io/github/issues/threecifanggen/python-functional-programming) ![close-issues](https://img.shields.io/github/issues-closed/threecifanggen/python-functional-programming) ![version](https://img.shields.io/github/v/release/threecifanggen/python-functional-programming?include_prereleases) ![travis-ci](https://img.shields.io/travis/threecifanggen/python-functional-programming/main)
 
 依赖：
 
