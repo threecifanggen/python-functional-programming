@@ -1,20 +1,19 @@
 name: Publish fppy-learn to PYPI
 on: 
-  pull_request:
+  push:
     branches:
       - main # 仅当pull request到main的时候操作
 jobs:
   Initialization-Actions:
     runs-on: ubuntu-latest # 指定系统
     steps:
-      - name: Environment setup
-        working-directory: ./
-        with:
-          python_version: "3.7.1"
-          poetry_version: "==1.1.12"
-          pypi_token: ${{ secrets.PYPI_TOKEN }}
-      - uses: actions/checkout@v2
-      - run: pip install poetry
-      - run: poetry install
-      - run: poetry build
-      - run: poetry publish
+      - name: check list
+        run: ls -all
+      - name: install poetry
+        run: pip install poetry
+      - name: install all dependencies
+        run: poetry install
+      - name: build
+        run: poetry build
+      - name: publish
+        run: poetry publish --username 3gee --password ${{ secrets.PYPI_TOKEN }}
