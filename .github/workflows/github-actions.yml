@@ -9,7 +9,6 @@ jobs:
     steps:
       - name: Environment setup
         uses: actions/checkout@v2
-        working-directory: ./
         
       - name: publish
         with:
